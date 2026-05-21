@@ -1,0 +1,305 @@
+---
+import { highlightCode } from "../utils/highlighter.js";
+
+interface CodeBlockProNode {
+	_type: "code-block-pro";
+	_key?: string;
+	code: string;
+	language?: string;
+	theme?: string;
+	filename?: string;
+	lineNumbers?: boolean;
+	lineHighlights?: string;
+	copyButton?: boolean;
+	maxHeight?: string;
+}
+
+const node: CodeBlockProNode = Astro.props.node;
+const {
+	code = "",
+	language = "text",
+	theme = "github-dark",
+	filename,
+	lineNumbers = false,
+	lineHighlights = "",
+	copyButton = true,
+	maxHeight,
+} = node;
+
+import { parseLineHighlights } from "../utils/parseLineHighlights.js";
+
+const highlightedLineNumbers = parseLineHighlights(lineHighlights);
+
+// Strip trailing newline to avoid an empty last line in Shiki output
+const trimmedCode = code.replace(/\n$/, "");
+const codeForShiki = trimmedCode || " ";
+
+// Generate highlighted HTML via Shiki (JS engine — no WASM)
+let highlightedHtml = await highlightCode(codeForShiki, language || "text", theme || "github-dark");
+
+// Post-process: add cbp-highlighted class to highlighted line spans.
+// Shiki outputs each line as <span class="line">...</span>.
+// We match each occurrence and add our class for highlighted lines.
+if (highlightedLineNumbers.size > 0) {
+	let lineIdx = 0;
+	highlightedHtml = highlightedHtml.replace(/<span class="line"/g, (match) => {
+		lineIdx++;
+		if (highlightedLineNumbers.has(lineIdx)) {
+			return '<span class="line cbp-highlighted"';
+		}
+		return match;
+	});
+}
+
+const hasFilename = !!filename;
+const hasLineNumbers = !!lineNumbers;
+const hasCopyButton = copyButton !== false;
+
+// Compute a label for the language badge
+const langLabel = language && language !== "text" ? language : "";
+---
+
+<div class:list={["cbp-wrapper", hasFilename && "cbp-has-filename"]}>
+	{hasFilename && (
+		<div class="cbp-header">
+			<span class="cbp-filename">{filename}</span>
+			{langLabel && <span class="cbp-lang-badge">{langLabel}</span>}
+		</div>
+	)}
+	<div
+		class:list={["cbp-body", hasLineNumbers && "cbp-has-line-numbers"]}
+	>
+		<div
+			class="cbp-scroll"
+			style={maxHeight ? `max-height:${maxHeight}` : undefined}
+		>
+			<Fragment set:html={highlightedHtml} />
+		</div>
+		{hasCopyButton && (
+			<button
+				class="cbp-copy-btn"
+				title="Copy code"
+				aria-label="Copy code to clipboard"
+				data-code={trimmedCode}
+			>
+				<svg
+					class="cbp-icon-copy"
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+					<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+				</svg>
+				<svg
+					class="cbp-icon-check"
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<polyline points="20 6 9 17 4 12"></polyline>
+				</svg>
+			</button>
+		)}
+	</div>
+</div>
+
+<style is:global>
+	/* ================================================================
+	   Code Block Pro — full-featured code renderer
+	   All selectors prefixed with .cbp- to avoid collisions.
+	   Using `is:global` because Shiki HTML is injected via set:html
+	   and won't receive Astro's scoping data attributes.
+	   ================================================================ */
+
+	.cbp-wrapper {
+		--cbp-radius: 8px;
+		border-radius: var(--cbp-radius);
+		overflow: hidden;
+		margin: 1.5em 0;
+		font-size: 0.875em;
+		line-height: 1.6;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+	}
+
+	/* ---- Header (filename tab) ---- */
+	.cbp-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75em;
+		padding: 0.45em 1em;
+		background: rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+	}
+
+	.cbp-filename {
+		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+			"Liberation Mono", monospace;
+		font-size: 0.8em;
+		opacity: 0.8;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.cbp-lang-badge {
+		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+			"Liberation Mono", monospace;
+		font-size: 0.7em;
+		padding: 0.15em 0.5em;
+		border-radius: 3px;
+		background: rgba(127, 127, 127, 0.2);
+		opacity: 0.7;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		flex-shrink: 0;
+	}
+
+	/* ---- Body & scroll container ---- */
+	.cbp-body {
+		position: relative;
+	}
+
+	.cbp-scroll {
+		overflow: auto;
+	}
+
+	.cbp-scroll > pre {
+		margin: 0 !important;
+		padding: 1em !important;
+		border-radius: 0 !important;
+		min-width: 100%;
+		box-sizing: border-box;
+	}
+
+	.cbp-wrapper:not(.cbp-has-filename) .cbp-scroll > pre {
+		border-radius: var(--cbp-radius) !important;
+	}
+
+	/* ---- Line numbers (CSS counter approach) ---- */
+	.cbp-has-line-numbers .cbp-scroll > pre code {
+		counter-reset: cbp-line;
+	}
+
+	.cbp-has-line-numbers .line {
+		counter-increment: cbp-line;
+		display: block;
+		padding-left: 3.5em;
+		position: relative;
+		min-height: 1em;
+	}
+
+	.cbp-has-line-numbers .line::before {
+		content: counter(cbp-line);
+		position: absolute;
+		left: 0;
+		width: 2.5em;
+		text-align: right;
+		user-select: none;
+		-webkit-user-select: none;
+		opacity: 0.3;
+		font-size: 0.85em;
+		speak: never;
+		pointer-events: none;
+	}
+
+	/* ---- Highlighted lines ---- */
+	.cbp-highlighted {
+		background: rgba(255, 215, 64, 0.12);
+		display: block;
+		margin: 0 -1em;
+		padding: 0 1em;
+		box-shadow: inset 3px 0 0 0 rgba(255, 180, 0, 0.45);
+	}
+
+	.cbp-has-line-numbers .cbp-highlighted {
+		margin-left: -3.5em;
+		padding-left: 3.5em;
+	}
+
+	/* ---- Copy button ---- */
+	.cbp-copy-btn {
+		position: absolute;
+		top: 0.5em;
+		right: 0.5em;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2em;
+		height: 2em;
+		padding: 0;
+		background: rgba(127, 127, 127, 0.15);
+		border: 1px solid rgba(127, 127, 127, 0.15);
+		border-radius: 4px;
+		cursor: pointer;
+		color: inherit;
+		opacity: 0;
+		transition: opacity 0.2s ease, background 0.15s ease;
+	}
+
+	.cbp-body:hover .cbp-copy-btn {
+		opacity: 0.7;
+	}
+
+	.cbp-copy-btn:hover {
+		opacity: 1 !important;
+		background: rgba(127, 127, 127, 0.25);
+	}
+
+	.cbp-copy-btn:active {
+		transform: scale(0.92);
+	}
+
+	.cbp-icon-check {
+		display: none;
+	}
+
+	.cbp-copy-btn.cbp-copied .cbp-icon-copy {
+		display: none;
+	}
+
+	.cbp-copy-btn.cbp-copied .cbp-icon-check {
+		display: block;
+		color: #4ade80;
+	}
+
+	.cbp-copy-btn.cbp-copied {
+		opacity: 1 !important;
+	}
+</style>
+
+<script>
+	// Copy-to-clipboard handler — delegated so it works for all instances.
+	document.addEventListener("click", (e: MouseEvent) => {
+		const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".cbp-copy-btn");
+		if (!btn) return;
+
+		const raw = btn.getAttribute("data-code") ?? "";
+		// Decode HTML entities that Astro may have encoded in the attribute
+		const decoded = raw
+			.replace(/&amp;/g, "&")
+			.replace(/&lt;/g, "<")
+			.replace(/&gt;/g, ">")
+			.replace(/&quot;/g, '"')
+			.replace(/&#39;/g, "'");
+
+		navigator.clipboard.writeText(decoded).then(() => {
+			btn.classList.add("cbp-copied");
+			setTimeout(() => btn.classList.remove("cbp-copied"), 2000);
+		});
+	});
+</script>
