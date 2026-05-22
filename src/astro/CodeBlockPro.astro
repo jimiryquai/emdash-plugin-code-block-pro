@@ -199,15 +199,15 @@ const langLabel = language && language !== "text" ? language : "";
 		border-radius: 0 !important;
 		min-width: 100%;
 		box-sizing: border-box;
-		line-height: 1.5;
+		line-height: 1;
 	}
 
 	.cbp-scroll > pre code {
-		line-height: 1.5;
+		line-height: 1;
 	}
 
 	.cbp-scroll > pre .line {
-		line-height: inherit;
+		line-height: 1;
 		min-height: unset;
 	}
 
@@ -223,8 +223,11 @@ const langLabel = language && language !== "text" ? language : "";
 	.cbp-has-line-numbers .line {
 		counter-increment: cbp-line;
 		display: block;
-		padding-left: 3.5em;
 		position: relative;
+	}
+
+	.cbp-has-line-numbers pre code {
+		padding-left: 3.5em;
 	}
 
 	.cbp-has-line-numbers .line::before {
@@ -251,8 +254,8 @@ const langLabel = language && language !== "text" ? language : "";
 	}
 
 	.cbp-has-line-numbers .cbp-highlighted {
-		margin-left: -3.5em;
-		padding-left: 3.5em;
+		margin-left: -1em;
+		padding-left: calc(1em + 3.5em);
 	}
 
 	/* ---- Copy button ---- */
@@ -267,23 +270,17 @@ const langLabel = language && language !== "text" ? language : "";
 		width: 2em;
 		height: 2em;
 		padding: 0;
-		background: rgba(127, 127, 127, 0.15);
-		border: 1px solid rgba(127, 127, 127, 0.15);
+		background: rgba(127, 127, 127, 0.3);
+		border: 1px solid rgba(127, 127, 127, 0.2);
 		border-radius: 4px;
 		cursor: pointer;
 		color: inherit;
-		opacity: 0.4;
-		transition: opacity 0.2s ease, background 0.15s ease;
-	}
-
-	.cbp-body:hover .cbp-copy-btn {
-		opacity: 0.7;
-		background: rgba(127, 127, 127, 0.25);
+		opacity: 1;
+		transition: opacity 0.15s ease;
 	}
 
 	.cbp-copy-btn:hover {
-		opacity: 1 !important;
-		background: rgba(127, 127, 127, 0.35);
+		opacity: 0.85;
 	}
 
 	.cbp-copy-btn:active {
@@ -304,7 +301,7 @@ const langLabel = language && language !== "text" ? language : "";
 	}
 
 	.cbp-copy-btn.cbp-copied {
-		opacity: 1 !important;
+		opacity: 1;
 	}
 </style>
 
