@@ -1,6 +1,15 @@
 ---
 import { highlightCode } from "../utils/highlighter.js";
 
+function escapeHtml(str: string): string {
+	return str
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#39;");
+}
+
 interface CodeBlockProNode {
 	_type: "code-block-pro";
 	_key?: string;
@@ -35,7 +44,14 @@ const trimmedCode = code.replace(/\n$/, "");
 const codeForShiki = trimmedCode || " ";
 
 // Generate highlighted HTML via Shiki (JS engine — no WASM)
-let highlightedHtml = await highlightCode(codeForShiki, language || "text", theme || "github-dark");
+// Wrapped in try/catch to fall back to raw code if Shiki fails
+let highlightedHtml: string;
+try {
+	highlightedHtml = await highlightCode(codeForShiki, language || "text", theme || "github-dark");
+} catch (err) {
+	console.error("[code-block-pro] Shiki highlighting failed:", err);
+	highlightedHtml = `<pre class="shiki" style="background-color:#24292e;color:#e1e4e8"><code>${escapeHtml(trimmedCode)}</code></pre>`;
+}
 
 // Post-process: add cbp-highlighted class to highlighted line spans.
 // Shiki outputs each line as <span class="line">...</span>.
