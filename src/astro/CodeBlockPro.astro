@@ -146,7 +146,7 @@ const langLabel = language && language !== "text" ? language : "";
 		overflow: hidden;
 		margin: 1.5em 0;
 		font-size: 0.875em;
-		line-height: 1.6;
+		line-height: 1.5;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
 	}
 
@@ -199,6 +199,16 @@ const langLabel = language && language !== "text" ? language : "";
 		border-radius: 0 !important;
 		min-width: 100%;
 		box-sizing: border-box;
+		line-height: 1.5;
+	}
+
+	.cbp-scroll > pre code {
+		line-height: 1.5;
+	}
+
+	.cbp-scroll > pre .line {
+		line-height: inherit;
+		min-height: unset;
 	}
 
 	.cbp-wrapper:not(.cbp-has-filename) .cbp-scroll > pre {
@@ -215,7 +225,6 @@ const langLabel = language && language !== "text" ? language : "";
 		display: block;
 		padding-left: 3.5em;
 		position: relative;
-		min-height: 1em;
 	}
 
 	.cbp-has-line-numbers .line::before {
@@ -263,18 +272,18 @@ const langLabel = language && language !== "text" ? language : "";
 		border-radius: 4px;
 		cursor: pointer;
 		color: inherit;
-		opacity: 0;
+		opacity: 0.4;
 		transition: opacity 0.2s ease, background 0.15s ease;
 	}
 
 	.cbp-body:hover .cbp-copy-btn {
-		opacity: 0.5;
+		opacity: 0.7;
 		background: rgba(127, 127, 127, 0.25);
 	}
 
 	.cbp-copy-btn:hover {
 		opacity: 1 !important;
-		background: rgba(127, 127, 127, 0.25);
+		background: rgba(127, 127, 127, 0.35);
 	}
 
 	.cbp-copy-btn:active {
