@@ -1,12 +1,11 @@
-import { getViteConfig } from "astro/config";
+import { defineConfig } from "vitest/config";
 
-// Use Astro's Vite pipeline so .astro files are compiled automatically.
-// We point root at the plugin directory itself (no astro.config = no Cloudflare adapter)
-// but still get the Astro Vite plugin for .astro compilation.
-export default getViteConfig({
+// Plain vitest config — the descriptor test doesn't need Astro's Vite pipeline.
+// For .astro component tests, use `getViteConfig` from `astro/config` instead
+// (requires astro as a devDependency).
+export default defineConfig({
 	test: {
 		include: ["src/**/*.test.{ts,tsx}"],
-		// Shiki needs a bit longer for first load (WASM grammar init)
 		testTimeout: 30_000,
 		globals: true,
 	},

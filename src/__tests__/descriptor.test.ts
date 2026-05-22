@@ -26,51 +26,51 @@ describe("codeBlockProPlugin descriptor — portableTextBlocks", () => {
     });
 
     it("has a 'code' field (textarea)", () => {
-      const field = block.fields.find((f: any) => f.name === "code");
+      const field = block.fields.find((f: any) => f.action_id === "code");
       expect(field).toBeDefined();
-      expect(field.type).toBe("text");
+      expect(field.type).toBe("text_input");
     });
 
     it("has a 'language' field (dropdown)", () => {
-      const field = block.fields.find((f: any) => f.name === "language");
+      const field = block.fields.find((f: any) => f.action_id === "language");
       expect(field).toBeDefined();
       expect(field.type).toBe("select");
     });
 
     it("has a 'theme' field (dropdown)", () => {
-      const field = block.fields.find((f: any) => f.name === "theme");
+      const field = block.fields.find((f: any) => f.action_id === "theme");
       expect(field).toBeDefined();
       expect(field.type).toBe("select");
     });
 
     it("has a 'filename' field (text input)", () => {
-      const field = block.fields.find((f: any) => f.name === "filename");
+      const field = block.fields.find((f: any) => f.action_id === "filename");
       expect(field).toBeDefined();
-      expect(field.type).toBe("string");
+      expect(field.type).toBe("text_input");
     });
 
     it("has a 'lineNumbers' field (toggle)", () => {
-      const field = block.fields.find((f: any) => f.name === "lineNumbers");
+      const field = block.fields.find((f: any) => f.action_id === "lineNumbers");
       expect(field).toBeDefined();
-      expect(field.type).toBe("boolean");
+      expect(field.type).toBe("toggle");
     });
 
     it("has a 'lineHighlights' field (text input)", () => {
-      const field = block.fields.find((f: any) => f.name === "lineHighlights");
+      const field = block.fields.find((f: any) => f.action_id === "lineHighlights");
       expect(field).toBeDefined();
-      expect(field.type).toBe("string");
+      expect(field.type).toBe("text_input");
     });
 
     it("has a 'copyButton' field (toggle)", () => {
-      const field = block.fields.find((f: any) => f.name === "copyButton");
+      const field = block.fields.find((f: any) => f.action_id === "copyButton");
       expect(field).toBeDefined();
-      expect(field.type).toBe("boolean");
+      expect(field.type).toBe("toggle");
     });
 
     it("has a 'maxHeight' field (text input)", () => {
-      const field = block.fields.find((f: any) => f.name === "maxHeight");
+      const field = block.fields.find((f: any) => f.action_id === "maxHeight");
       expect(field).toBeDefined();
-      expect(field.type).toBe("string");
+      expect(field.type).toBe("text_input");
     });
 
     it("declares exactly 8 fields", () => {
