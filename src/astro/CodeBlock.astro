@@ -14,7 +14,22 @@ const { node } = Astro.props;
 const { code, language, filename } = node;
 const lang = language || "text";
 
-const highlightedHtml = await highlightCode(code, lang, "github-dark");
+function escapeHtml(str: string): string {
+	return str
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#39;");
+}
+
+let highlightedHtml: string;
+try {
+	highlightedHtml = await highlightCode(code, lang, "github-dark");
+} catch (err) {
+	console.error("[code-block-pro] Shiki highlighting failed:", err);
+	highlightedHtml = `<pre class="shiki" style="background-color:#24292e;color:#e1e4e8"><code>${escapeHtml(code)}</code></pre>`;
+}
 ---
 
 <div class="code-block-pro">
