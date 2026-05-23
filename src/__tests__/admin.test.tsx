@@ -52,4 +52,18 @@ describe("CodeBlockProEditor", () => {
 		render(<CodeBlockProEditor />);
 		expect(screen.getByLabelText(/max height/i)).toBeInTheDocument();
 	});
+
+	it("renders a starting line number input", () => {
+		render(<CodeBlockProEditor />);
+		expect(screen.getByLabelText(/starting line number/i)).toBeInTheDocument();
+	});
+
+	it("renders a theme selector with all 24 options", () => {
+		render(<CodeBlockProEditor />);
+		const themeSelect = screen.getByLabelText(/theme/i);
+		const options = themeSelect.querySelectorAll("option");
+		expect(options.length).toBe(24);
+		expect(screen.getByRole("option", { name: "Synthwave '84" })).toBeInTheDocument();
+		expect(screen.getByRole("option", { name: "Rosé Pine" })).toBeInTheDocument();
+	});
 });
