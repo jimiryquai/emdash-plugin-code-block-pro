@@ -14,6 +14,13 @@ export default defineConfig({
 	server: {
 		port: 4323,
 	},
+	vite: {
+		server: {
+			fs: {
+				allow: [".."]
+			}
+		}
+	},
 	integrations: [
 		react(),
 		emdash({

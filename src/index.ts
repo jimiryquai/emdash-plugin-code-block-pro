@@ -71,6 +71,7 @@ export function codeBlockProPlugin(options?: {
     version: "0.1.0",
     format: "native",
     entrypoint: "emdash-plugin-code-block-pro",
+    adminEntry: "emdash-plugin-code-block-pro/admin",
     componentsEntry: "emdash-plugin-code-block-pro/astro",
     options: options ?? {},
     portableTextBlocks: [blockType],

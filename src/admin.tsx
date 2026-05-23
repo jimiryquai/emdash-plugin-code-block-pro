@@ -82,3 +82,8 @@ export function CodeBlockProEditor() {
     </div>
   );
 }
+
+export const fields = {
+  CodeBlockProEditor,
+};
+
