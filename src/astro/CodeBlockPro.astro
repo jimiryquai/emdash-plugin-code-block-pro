@@ -103,8 +103,8 @@ if (lineNumbers && startNumber !== 1) {
 }
 
 const hasFilename = !!filename;
-const hasLineNumbers = !!lineNumbers;
-const hasCopyButton = copyButton !== false;
+const hasLineNumbers = lineNumbers === true || lineNumbers === "true";
+const hasCopyButton = copyButton !== false && copyButton !== "false";
 
 // Compute a label for the language badge
 const langLabel = language && language !== "text" ? language : "";
@@ -219,12 +219,37 @@ const isDark = isThemeDark(themeBg);
 	   and won't receive Astro's scoping data attributes.
 	   ================================================================ */
 
+	.cbp-wrapper {
+		--cbp-radius: 12px;
+		border-radius: var(--cbp-radius);
+		overflow: hidden;
+		margin: 0.5rem 0;
+		font-size: 0.875em;
+		line-height: 1.5;
+		background: var(--cbp-theme-bg, #24292e);
+		color: var(--cbp-theme-fg, #e1e4e8);
+		border: 1px solid rgba(127, 127, 127, 0.15);
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
+
+		/* Safe WCAG fallback values */
+		--cbp-line-number-color: rgba(127, 127, 127, 0.5);
+		--cbp-header-bg: rgba(0, 0, 0, 0.1);
+		--cbp-header-border: rgba(127, 127, 127, 0.15);
+		--cbp-badge-fg: rgba(127, 127, 127, 0.7);
+		--cbp-filename-fg: rgba(127, 127, 127, 0.75);
+		--cbp-btn-bg: rgba(127, 127, 127, 0.05);
+		--cbp-btn-border: rgba(127, 127, 127, 0.15);
+		--cbp-btn-fg: rgba(127, 127, 127, 0.75);
+		--cbp-btn-hover-bg: rgba(127, 127, 127, 0.12);
+		--cbp-btn-hover-border: rgba(127, 127, 127, 0.3);
+		--cbp-btn-hover-fg: inherit;
+	}
+
 	.cbp-wrapper.cbp-theme-dark {
 		--cbp-line-number-color: rgba(255, 255, 255, 0.5);
 		--cbp-header-bg: rgba(0, 0, 0, 0.22);
 		--cbp-header-border: rgba(255, 255, 255, 0.1);
-		--cbp-badge-bg: rgba(255, 255, 255, 0.08);
-		--cbp-badge-fg: rgba(255, 255, 255, 0.85);
+		--cbp-badge-fg: rgba(255, 255, 255, 0.65);
 		--cbp-filename-fg: rgba(255, 255, 255, 0.75);
 		--cbp-btn-bg: rgba(255, 255, 255, 0.05);
 		--cbp-btn-border: rgba(255, 255, 255, 0.15);
@@ -238,8 +263,7 @@ const isDark = isThemeDark(themeBg);
 		--cbp-line-number-color: rgba(0, 0, 0, 0.5);
 		--cbp-header-bg: rgba(0, 0, 0, 0.04);
 		--cbp-header-border: rgba(0, 0, 0, 0.08);
-		--cbp-badge-bg: rgba(0, 0, 0, 0.06);
-		--cbp-badge-fg: rgba(0, 0, 0, 0.75);
+		--cbp-badge-fg: rgba(0, 0, 0, 0.7);
 		--cbp-filename-fg: rgba(0, 0, 0, 0.7);
 		--cbp-btn-bg: rgba(0, 0, 0, 0.03);
 		--cbp-btn-border: rgba(0, 0, 0, 0.12);
@@ -247,19 +271,6 @@ const isDark = isThemeDark(themeBg);
 		--cbp-btn-hover-bg: rgba(0, 0, 0, 0.08);
 		--cbp-btn-hover-border: rgba(0, 0, 0, 0.25);
 		--cbp-btn-hover-fg: rgba(0, 0, 0, 0.95);
-	}
-
-	.cbp-wrapper {
-		--cbp-radius: 12px;
-		border-radius: var(--cbp-radius);
-		overflow: hidden;
-		margin: 1.5em 0;
-		font-size: 0.875em;
-		line-height: 1.5;
-		background: var(--cbp-theme-bg, #24292e);
-		color: var(--cbp-theme-fg, #e1e4e8);
-		border: 1px solid rgba(127, 127, 127, 0.15);
-		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
 	}
 
 	/* ---- Header (filename tab & toolbar) ---- */
@@ -302,15 +313,16 @@ const isDark = isThemeDark(themeBg);
 	.cbp-wrapper .cbp-lang-badge {
 		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
 			"Liberation Mono", monospace;
-		font-size: 0.7em;
-		padding: 0.15em 0.55em;
-		border-radius: 4px;
-		background: var(--cbp-badge-bg);
+		font-size: 0.75em;
 		color: var(--cbp-badge-fg);
 		text-transform: uppercase;
-		font-weight: 600;
-		letter-spacing: 0.05em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
 		flex-shrink: 0;
+		background: transparent !important;
+		padding: 0 !important;
+		border: none !important;
+		border-radius: 0 !important;
 	}
 
 	/* ---- Body & scroll container ---- */
@@ -323,18 +335,23 @@ const isDark = isThemeDark(themeBg);
 	}
 
 	.cbp-wrapper .cbp-scroll > pre {
-		margin: 0;
-		padding: 1em 0;
-		border-radius: 0;
+		margin: 0 !important;
+		padding: 0.5rem 0 !important;
+		border: none !important;
+		border-radius: 0 !important;
+		background: transparent !important;
 		min-width: 100%;
 		box-sizing: border-box;
-		background: transparent;
 		color: inherit;
 	}
 
 	.cbp-wrapper .cbp-scroll > pre code {
 		display: grid;
 		min-width: 100%;
+		background: transparent !important;
+		padding: 0 !important;
+		border: none !important;
+		border-radius: 0 !important;
 	}
 
 	.cbp-wrapper .cbp-scroll > pre code .line {
