@@ -1,0 +1,109 @@
+---
+import { getEmDashEntry, decodeSlug } from "emdash";
+import { PortableText } from "emdash/ui";
+import { blockComponents } from "../../astro/index.ts";
+
+const slug = decodeSlug(Astro.params.slug);
+
+if (!slug) {
+	return Astro.redirect("/404");
+}
+
+const { entry: post } = await getEmDashEntry("posts", slug);
+
+if (!post) {
+	return Astro.redirect("/404");
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{post.data.title || "Post Preview"}</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--font-sans: 'Inter', sans-serif;
+			--font-display: 'Instrument Serif', serif;
+			background-color: #faf8f5;
+			color: #1c1917;
+		}
+		body {
+			font-family: var(--font-sans);
+			margin: 0;
+			padding: 0;
+			line-height: 1.6;
+		}
+		.container {
+			max-width: 48rem;
+			margin: 0 auto;
+			padding: 4rem 1.5rem;
+		}
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #78716c;
+			text-decoration: none;
+			font-size: 0.875rem;
+			margin-bottom: 2rem;
+			font-weight: 500;
+			transition: color 0.15s ease;
+		}
+		.back-link:hover {
+			color: #1c1917;
+		}
+		.post-header {
+			margin-bottom: 3rem;
+		}
+		h1 {
+			font-family: var(--font-display);
+			font-size: 3.5rem;
+			line-height: 1.1;
+			font-weight: 400;
+			margin: 0 0 1rem 0;
+			letter-spacing: -0.02em;
+		}
+		.post-meta {
+			font-size: 0.875rem;
+			color: #78716c;
+			display: flex;
+			gap: 1rem;
+		}
+		.content {
+			font-size: 1.125rem;
+			color: #292524;
+		}
+		.content p {
+			margin-bottom: 1.5rem;
+		}
+		pre {
+			padding: 1.25rem;
+			border-radius: 12px;
+			overflow-x: auto;
+			margin: 1.75rem 0;
+			font-size: 0.95rem;
+			border: 1px solid rgba(0,0,0,0.05);
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<a href="/_emdash/admin/" class="back-link">
+			← Back to Admin
+		</a>
+		<article>
+			<header class="post-header">
+				<h1>{post.data.title || "Untitled Post"}</h1>
+				<div class="post-meta">
+					<span>Published: {post.data.publishedAt ? post.data.publishedAt.toLocaleDateString() : "Draft"}</span>
+				</div>
+			</header>
+			<div class="content">
+				<PortableText value={post.data.content} components={blockComponents} />
+			</div>
+		</article>
+	</div>
+</body>
+</html>
