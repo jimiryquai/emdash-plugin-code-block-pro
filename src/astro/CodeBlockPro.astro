@@ -111,10 +111,44 @@ const langLabel = language && language !== "text" ? language : "";
 
 // Header is shown if we have filename, language badge, OR a copy button
 const showHeader = hasFilename || !!langLabel || hasCopyButton;
+
+// Determine if the background is light or dark to style components responsively
+function isThemeDark(color: string): boolean {
+	const c = color.trim().toLowerCase();
+	if (c.startsWith("#")) {
+		const hex = c.substring(1);
+		let r = 0, g = 0, b = 0;
+		if (hex.length === 3) {
+			r = parseInt(hex[0] + hex[0], 16);
+			g = parseInt(hex[1] + hex[1], 16);
+			b = parseInt(hex[2] + hex[2], 16);
+		} else if (hex.length === 6) {
+			r = parseInt(hex.substring(0, 2), 16);
+			g = parseInt(hex.substring(2, 4), 16);
+			b = parseInt(hex.substring(4, 6), 16);
+		} else {
+			return true;
+		}
+		return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+	}
+	if (c.startsWith("rgb")) {
+		const matches = c.match(/\d+/g);
+		if (matches && matches.length >= 3) {
+			const r = parseInt(matches[0], 10);
+			const g = parseInt(matches[1], 10);
+			const b = parseInt(matches[2], 10);
+			return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+		}
+	}
+	if (c === "white" || c === "lightyellow" || c === "ivory" || c === "snow") return false;
+	return true;
+}
+
+const isDark = isThemeDark(themeBg);
 ---
 
 <div
-	class:list={["cbp-wrapper", showHeader && "cbp-has-header"]}
+	class:list={["cbp-wrapper", showHeader && "cbp-has-header", isDark ? "cbp-theme-dark" : "cbp-theme-light"]}
 	style={`--cbp-theme-bg: ${themeBg}; --cbp-theme-fg: ${themeFg};`}
 >
 	{showHeader && (
@@ -185,6 +219,36 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 	   and won't receive Astro's scoping data attributes.
 	   ================================================================ */
 
+	.cbp-wrapper.cbp-theme-dark {
+		--cbp-line-number-color: rgba(255, 255, 255, 0.5);
+		--cbp-header-bg: rgba(0, 0, 0, 0.22);
+		--cbp-header-border: rgba(255, 255, 255, 0.1);
+		--cbp-badge-bg: rgba(255, 255, 255, 0.08);
+		--cbp-badge-fg: rgba(255, 255, 255, 0.85);
+		--cbp-filename-fg: rgba(255, 255, 255, 0.75);
+		--cbp-btn-bg: rgba(255, 255, 255, 0.05);
+		--cbp-btn-border: rgba(255, 255, 255, 0.15);
+		--cbp-btn-fg: rgba(255, 255, 255, 0.8);
+		--cbp-btn-hover-bg: rgba(255, 255, 255, 0.12);
+		--cbp-btn-hover-border: rgba(255, 255, 255, 0.3);
+		--cbp-btn-hover-fg: #ffffff;
+	}
+
+	.cbp-wrapper.cbp-theme-light {
+		--cbp-line-number-color: rgba(0, 0, 0, 0.5);
+		--cbp-header-bg: rgba(0, 0, 0, 0.04);
+		--cbp-header-border: rgba(0, 0, 0, 0.08);
+		--cbp-badge-bg: rgba(0, 0, 0, 0.06);
+		--cbp-badge-fg: rgba(0, 0, 0, 0.75);
+		--cbp-filename-fg: rgba(0, 0, 0, 0.7);
+		--cbp-btn-bg: rgba(0, 0, 0, 0.03);
+		--cbp-btn-border: rgba(0, 0, 0, 0.12);
+		--cbp-btn-fg: rgba(0, 0, 0, 0.7);
+		--cbp-btn-hover-bg: rgba(0, 0, 0, 0.08);
+		--cbp-btn-hover-border: rgba(0, 0, 0, 0.25);
+		--cbp-btn-hover-fg: rgba(0, 0, 0, 0.95);
+	}
+
 	.cbp-wrapper {
 		--cbp-radius: 12px;
 		border-radius: var(--cbp-radius);
@@ -205,8 +269,8 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		justify-content: space-between;
 		gap: 0.75em;
 		padding: 0.4em 1em;
-		background: rgba(0, 0, 0, 0.15);
-		border-bottom: 1px solid rgba(127, 127, 127, 0.15);
+		background: var(--cbp-header-bg);
+		border-bottom: 1px solid var(--cbp-header-border);
 		min-height: 2.5em;
 		box-sizing: border-box;
 		color: inherit;
@@ -229,7 +293,7 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
 			"Liberation Mono", monospace;
 		font-size: 0.8em;
-		opacity: 0.8;
+		color: var(--cbp-filename-fg);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -239,12 +303,13 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
 			"Liberation Mono", monospace;
 		font-size: 0.7em;
-		padding: 0.15em 0.5em;
+		padding: 0.15em 0.55em;
 		border-radius: 4px;
-		background: rgba(127, 127, 127, 0.2);
-		opacity: 0.8;
+		background: var(--cbp-badge-bg);
+		color: var(--cbp-badge-fg);
 		text-transform: uppercase;
-		letter-spacing: 0.03em;
+		font-weight: 600;
+		letter-spacing: 0.05em;
 		flex-shrink: 0;
 	}
 
@@ -285,7 +350,7 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 	}
 
 	.cbp-wrapper .cbp-scroll > pre code .line:hover::before {
-		opacity: 0.5;
+		opacity: 0.8;
 	}
 
 	/* ---- Line numbers (CSS counter approach) ---- */
@@ -294,6 +359,7 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 	}
 
 	.cbp-body.cbp-has-line-numbers .cbp-scroll > pre code .line {
+		counter-increment: cbp-line;
 		position: relative;
 		padding-left: 3.5em;
 	}
@@ -306,11 +372,11 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		text-align: right;
 		user-select: none;
 		-webkit-user-select: none;
-		opacity: 0.35;
 		font-size: 0.85em;
 		speak: never;
 		pointer-events: none;
-		transition: opacity 0.2s ease;
+		transition: color 0.2s ease;
+		color: var(--cbp-line-number-color);
 	}
 
 	/* ---- Highlighted lines ---- */
@@ -327,12 +393,11 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		width: 2.25em;
 		height: 2.25em;
 		padding: 0;
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(127, 127, 127, 0.25);
+		background: var(--cbp-btn-bg);
+		border: 1px solid var(--cbp-btn-border);
+		color: var(--cbp-btn-fg);
 		border-radius: 6px;
 		cursor: pointer;
-		color: inherit;
-		opacity: 0.65;
 		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
@@ -342,9 +407,9 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 	}
 
 	.cbp-wrapper .cbp-copy-btn:hover {
-		opacity: 1;
-		background: rgba(127, 127, 127, 0.15);
-		border-color: rgba(127, 127, 127, 0.4);
+		background: var(--cbp-btn-hover-bg);
+		border-color: var(--cbp-btn-hover-border);
+		color: var(--cbp-btn-hover-fg);
 		transform: scale(1.05);
 	}
 
