@@ -73,8 +73,14 @@ describe("codeBlockProPlugin descriptor — portableTextBlocks", () => {
       expect(field.type).toBe("text_input");
     });
 
-    it("declares exactly 8 fields", () => {
-      expect(block.fields).toHaveLength(8);
+    it("has a 'startingLineNumber' field (text input)", () => {
+      const field = block.fields.find((f: any) => f.action_id === "startingLineNumber");
+      expect(field).toBeDefined();
+      expect(field.type).toBe("text_input");
+    });
+
+    it("declares exactly 9 fields", () => {
+      expect(block.fields).toHaveLength(9);
     });
   });
 });

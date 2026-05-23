@@ -186,4 +186,20 @@ describe("CodeBlockPro.astro — real Astro rendering", () => {
 		// data-code should contain the code (trailing newline stripped)
 		expect(html).toContain('data-code="hello\nworld"');
 	});
+
+	it("injects custom starting line number style when lineNumbers is true and startingLineNumber is provided", async () => {
+		const html = await container.renderToString(CodeBlockPro as AstroComponentFactory, {
+			props: {
+				node: {
+					_type: "code-block-pro",
+					code: "line one\nline two",
+					language: "text",
+					lineNumbers: true,
+					startingLineNumber: 10,
+				},
+			},
+		});
+
+		expect(html).toContain('style="counter-reset:cbp-line 9"');
+	});
 });

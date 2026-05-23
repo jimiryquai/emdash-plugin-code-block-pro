@@ -18,6 +18,7 @@ interface CodeBlockProNode {
 	theme?: string;
 	filename?: string;
 	lineNumbers?: boolean;
+	startingLineNumber?: number | string;
 	lineHighlights?: string;
 	copyButton?: boolean;
 	maxHeight?: string;
@@ -30,6 +31,7 @@ const {
 	theme = "github-dark",
 	filename,
 	lineNumbers = false,
+	startingLineNumber = 1,
 	lineHighlights = "",
 	copyButton = true,
 	maxHeight,
@@ -67,19 +69,78 @@ if (highlightedLineNumbers.size > 0) {
 	});
 }
 
+// Post-process: add custom starting line number if enabled and startNumber != 1
+const startNumber = parseInt(String(startingLineNumber), 10) || 1;
+if (lineNumbers && startNumber !== 1) {
+	highlightedHtml = highlightedHtml.replace(
+		/<code([^>]*)>/g,
+		(match, attrs) => {
+			if (attrs.includes("style=")) {
+				return `<code${attrs.replace(/style=["']([^"']*)["']/, `style="$1;counter-reset:cbp-line ${startNumber - 1}"`)}>`;
+			}
+			return `<code${attrs} style="counter-reset:cbp-line ${startNumber - 1}">`;
+		}
+	);
+}
+
 const hasFilename = !!filename;
 const hasLineNumbers = !!lineNumbers;
 const hasCopyButton = copyButton !== false;
 
 // Compute a label for the language badge
 const langLabel = language && language !== "text" ? language : "";
+
+// Header is shown if we have filename, language badge, OR a copy button
+const showHeader = hasFilename || !!langLabel || hasCopyButton;
 ---
 
-<div class:list={["cbp-wrapper", hasFilename && "cbp-has-filename"]}>
-	{hasFilename && (
+<div class:list={["cbp-wrapper", showHeader && "cbp-has-header"]}>
+	{showHeader && (
 		<div class="cbp-header">
-			<span class="cbp-filename">{filename}</span>
-			{langLabel && <span class="cbp-lang-badge">{langLabel}</span>}
+			<div class="cbp-header-left">
+				{langLabel && <span class="cbp-lang-badge">{langLabel}</span>}
+				{hasFilename && <span class="cbp-filename">{filename}</span>}
+			</div>
+			<div class="cbp-header-right">
+				{hasCopyButton && (
+					<button
+						class="cbp-copy-btn"
+						title="Copy code"
+						aria-label="Copy code to clipboard"
+						data-code={trimmedCode}
+					>
+						<svg
+							class="cbp-icon-copy"
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+							<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+						</svg>
+						<svg
+							class="cbp-icon-check"
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<polyline points="20 6 9 17 4 12"></polyline>
+						</svg>
+					</button>
+				)}
+			</div>
 		</div>
 	)}
 	<div
@@ -91,44 +152,6 @@ const langLabel = language && language !== "text" ? language : "";
 		>
 			<Fragment set:html={highlightedHtml} />
 		</div>
-		{hasCopyButton && (
-			<button
-				class="cbp-copy-btn"
-				title="Copy code"
-				aria-label="Copy code to clipboard"
-				data-code={trimmedCode}
-			>
-				<svg
-					class="cbp-icon-copy"
-					xmlns="http://www.w3.org/2000/svg"
-					width="16"
-					height="16"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-					<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-				</svg>
-				<svg
-					class="cbp-icon-check"
-					xmlns="http://www.w3.org/2000/svg"
-					width="16"
-					height="16"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<polyline points="20 6 9 17 4 12"></polyline>
-				</svg>
-			</button>
-		)}
 	</div>
 </div>
 
@@ -141,24 +164,40 @@ const langLabel = language && language !== "text" ? language : "";
 	   ================================================================ */
 
 	.cbp-wrapper {
-		--cbp-radius: 8px;
+		--cbp-radius: 12px;
 		border-radius: var(--cbp-radius);
 		overflow: hidden;
 		margin: 1.5em 0;
 		font-size: 0.875em;
 		line-height: 1.5;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(127, 127, 127, 0.15);
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
 	}
 
-	/* ---- Header (filename tab) ---- */
+	/* ---- Header (filename tab & toolbar) ---- */
 	.cbp-header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.75em;
-		padding: 0.45em 1em;
-		background: rgba(255, 255, 255, 0.05);
+		padding: 0.4em 1em;
+		background: rgba(255, 255, 255, 0.04);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+		min-height: 2.5em;
+		box-sizing: border-box;
+	}
+
+	.cbp-header-left {
+		display: flex;
+		align-items: center;
+		gap: 0.75em;
+		min-width: 0;
+	}
+
+	.cbp-header-right {
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
 	}
 
 	.cbp-filename {
@@ -176,7 +215,7 @@ const langLabel = language && language !== "text" ? language : "";
 			"Liberation Mono", monospace;
 		font-size: 0.7em;
 		padding: 0.15em 0.5em;
-		border-radius: 3px;
+		border-radius: 4px;
 		background: rgba(127, 127, 127, 0.2);
 		opacity: 0.7;
 		text-transform: uppercase;
@@ -195,23 +234,34 @@ const langLabel = language && language !== "text" ? language : "";
 
 	.cbp-scroll > pre {
 		margin: 0 !important;
-		padding: 1em !important;
+		padding: 1em 0 !important;
 		border-radius: 0 !important;
 		min-width: 100%;
 		box-sizing: border-box;
-		line-height: 1;
 	}
 
 	.cbp-scroll > pre code {
-		line-height: 1;
+		display: grid;
+		min-width: 100%;
 	}
 
 	.cbp-scroll > pre .line {
-		line-height: 1;
-		min-height: unset;
+		display: block;
+		min-height: 1.5em;
+		line-height: 1.5;
+		padding: 0 1.5em;
+		transition: background-color 0.2s ease, opacity 0.2s ease;
 	}
 
-	.cbp-wrapper:not(.cbp-has-filename) .cbp-scroll > pre {
+	.cbp-scroll > pre .line:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	.cbp-scroll > pre .line:hover::before {
+		opacity: 0.5;
+	}
+
+	.cbp-wrapper:not(.cbp-has-header) .cbp-scroll > pre {
 		border-radius: var(--cbp-radius) !important;
 	}
 
@@ -222,69 +272,61 @@ const langLabel = language && language !== "text" ? language : "";
 
 	.cbp-has-line-numbers .line {
 		counter-increment: cbp-line;
-		display: block;
 		position: relative;
-	}
-
-	.cbp-has-line-numbers pre code {
 		padding-left: 3.5em;
 	}
 
 	.cbp-has-line-numbers .line::before {
 		content: counter(cbp-line);
 		position: absolute;
-		left: 0;
-		width: 2.5em;
+		left: 1.5em;
+		width: 1.5em;
 		text-align: right;
 		user-select: none;
 		-webkit-user-select: none;
-		opacity: 0.3;
+		opacity: 0.25;
 		font-size: 0.85em;
 		speak: never;
 		pointer-events: none;
+		transition: opacity 0.2s ease;
 	}
 
 	/* ---- Highlighted lines ---- */
 	.cbp-highlighted {
-		background: rgba(255, 215, 64, 0.12);
-		display: block;
-		margin: 0 -1em;
-		padding: 0 1em;
-		box-shadow: inset 3px 0 0 0 rgba(255, 180, 0, 0.45);
-	}
-
-	.cbp-has-line-numbers .cbp-highlighted {
-		margin-left: -1em;
-		padding-left: calc(1em + 3.5em);
+		background: rgba(99, 102, 241, 0.08); /* Soft premium indigo */
+		box-shadow: inset 4px 0 0 0 #6366f1; /* Left accent indigo line */
 	}
 
 	/* ---- Copy button ---- */
 	.cbp-copy-btn {
-		position: absolute;
-		top: 0.5em;
-		right: 0.5em;
-		z-index: 2;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 2em;
 		height: 2em;
 		padding: 0;
-		background: rgba(127, 127, 127, 0.3);
-		border: 1px solid rgba(127, 127, 127, 0.2);
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 4px;
 		cursor: pointer;
-		color: inherit;
-		opacity: 1;
-		transition: opacity 0.15s ease;
+		color: rgba(255, 255, 255, 0.6);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.cbp-copy-btn:focus-visible {
+		outline: 2px solid #6366f1;
+		outline-offset: 2px;
 	}
 
 	.cbp-copy-btn:hover {
-		opacity: 0.85;
+		color: #ffffff;
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.2);
+		transform: scale(1.05);
 	}
 
 	.cbp-copy-btn:active {
-		transform: scale(0.92);
+		transform: scale(0.95);
 	}
 
 	.cbp-icon-check {
@@ -298,10 +340,6 @@ const langLabel = language && language !== "text" ? language : "";
 	.cbp-copy-btn.cbp-copied .cbp-icon-check {
 		display: block;
 		color: #4ade80;
-	}
-
-	.cbp-copy-btn.cbp-copied {
-		opacity: 1;
 	}
 </style>
 
