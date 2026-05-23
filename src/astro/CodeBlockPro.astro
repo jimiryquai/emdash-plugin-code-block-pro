@@ -55,6 +55,25 @@ try {
 	highlightedHtml = `<pre class="shiki" style="background-color:#24292e;color:#e1e4e8"><code>${escapeHtml(trimmedCode)}</code></pre>`;
 }
 
+// Extract background-color and color from Shiki output to match wrapper theme
+let themeBg = "#24292e";
+let themeFg = "#e1e4e8";
+
+const bgMatch = highlightedHtml.match(/background-color:\s*([^;"]+)/);
+if (bgMatch) {
+	themeBg = bgMatch[1].trim();
+}
+const fgMatch = highlightedHtml.match(/color:\s*([^;"]+)/);
+if (fgMatch) {
+	themeFg = fgMatch[1].trim();
+}
+
+// Strip the inline style attribute from the <pre> tag to avoid using CSS !important hacks
+highlightedHtml = highlightedHtml.replace(
+	/<pre([^>]*)\sstyle="[^"]*"\s*([^>]*)>/,
+	(match, before, after) => `<pre${before}${after}>`
+);
+
 // Post-process: add cbp-highlighted class to highlighted line spans.
 // Shiki outputs each line as <span class="line">...</span>.
 // We match each occurrence and add our class for highlighted lines.
@@ -94,7 +113,10 @@ const langLabel = language && language !== "text" ? language : "";
 const showHeader = hasFilename || !!langLabel || hasCopyButton;
 ---
 
-<div class:list={["cbp-wrapper", showHeader && "cbp-has-header"]}>
+<div
+	class:list={["cbp-wrapper", showHeader && "cbp-has-header"]}
+	style={`--cbp-theme-bg: ${themeBg}; --cbp-theme-fg: ${themeFg};`}
+>
 	{showHeader && (
 		<div class="cbp-header">
 			<div class="cbp-header-left">
@@ -170,37 +192,40 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		margin: 1.5em 0;
 		font-size: 0.875em;
 		line-height: 1.5;
+		background: var(--cbp-theme-bg, #24292e);
+		color: var(--cbp-theme-fg, #e1e4e8);
 		border: 1px solid rgba(127, 127, 127, 0.15);
 		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
 	}
 
 	/* ---- Header (filename tab & toolbar) ---- */
-	.cbp-header {
+	.cbp-wrapper .cbp-header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.75em;
 		padding: 0.4em 1em;
-		background: rgba(255, 255, 255, 0.04);
-		border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+		background: rgba(0, 0, 0, 0.15);
+		border-bottom: 1px solid rgba(127, 127, 127, 0.15);
 		min-height: 2.5em;
 		box-sizing: border-box;
+		color: inherit;
 	}
 
-	.cbp-header-left {
+	.cbp-wrapper .cbp-header-left {
 		display: flex;
 		align-items: center;
 		gap: 0.75em;
 		min-width: 0;
 	}
 
-	.cbp-header-right {
+	.cbp-wrapper .cbp-header-right {
 		display: flex;
 		align-items: center;
 		flex-shrink: 0;
 	}
 
-	.cbp-filename {
+	.cbp-wrapper .cbp-filename {
 		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
 			"Liberation Mono", monospace;
 		font-size: 0.8em;
@@ -210,42 +235,44 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		text-overflow: ellipsis;
 	}
 
-	.cbp-lang-badge {
+	.cbp-wrapper .cbp-lang-badge {
 		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
 			"Liberation Mono", monospace;
 		font-size: 0.7em;
 		padding: 0.15em 0.5em;
 		border-radius: 4px;
 		background: rgba(127, 127, 127, 0.2);
-		opacity: 0.7;
+		opacity: 0.8;
 		text-transform: uppercase;
 		letter-spacing: 0.03em;
 		flex-shrink: 0;
 	}
 
 	/* ---- Body & scroll container ---- */
-	.cbp-body {
+	.cbp-wrapper .cbp-body {
 		position: relative;
 	}
 
-	.cbp-scroll {
+	.cbp-wrapper .cbp-scroll {
 		overflow: auto;
 	}
 
-	.cbp-scroll > pre {
-		margin: 0 !important;
-		padding: 1em 0 !important;
-		border-radius: 0 !important;
+	.cbp-wrapper .cbp-scroll > pre {
+		margin: 0;
+		padding: 1em 0;
+		border-radius: 0;
 		min-width: 100%;
 		box-sizing: border-box;
+		background: transparent;
+		color: inherit;
 	}
 
-	.cbp-scroll > pre code {
+	.cbp-wrapper .cbp-scroll > pre code {
 		display: grid;
 		min-width: 100%;
 	}
 
-	.cbp-scroll > pre .line {
+	.cbp-wrapper .cbp-scroll > pre code .line {
 		display: block;
 		min-height: 1.5em;
 		line-height: 1.5;
@@ -253,30 +280,25 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		transition: background-color 0.2s ease, opacity 0.2s ease;
 	}
 
-	.cbp-scroll > pre .line:hover {
+	.cbp-wrapper .cbp-scroll > pre code .line:hover {
 		background: rgba(255, 255, 255, 0.03);
 	}
 
-	.cbp-scroll > pre .line:hover::before {
+	.cbp-wrapper .cbp-scroll > pre code .line:hover::before {
 		opacity: 0.5;
 	}
 
-	.cbp-wrapper:not(.cbp-has-header) .cbp-scroll > pre {
-		border-radius: var(--cbp-radius) !important;
-	}
-
 	/* ---- Line numbers (CSS counter approach) ---- */
-	.cbp-has-line-numbers .cbp-scroll > pre code {
+	.cbp-body.cbp-has-line-numbers .cbp-scroll > pre code {
 		counter-reset: cbp-line;
 	}
 
-	.cbp-has-line-numbers .line {
-		counter-increment: cbp-line;
+	.cbp-body.cbp-has-line-numbers .cbp-scroll > pre code .line {
 		position: relative;
 		padding-left: 3.5em;
 	}
 
-	.cbp-has-line-numbers .line::before {
+	.cbp-body.cbp-has-line-numbers .cbp-scroll > pre code .line::before {
 		content: counter(cbp-line);
 		position: absolute;
 		left: 1.5em;
@@ -284,7 +306,7 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 		text-align: right;
 		user-select: none;
 		-webkit-user-select: none;
-		opacity: 0.25;
+		opacity: 0.35;
 		font-size: 0.85em;
 		speak: never;
 		pointer-events: none;
@@ -292,52 +314,53 @@ const showHeader = hasFilename || !!langLabel || hasCopyButton;
 	}
 
 	/* ---- Highlighted lines ---- */
-	.cbp-highlighted {
+	.cbp-wrapper .cbp-scroll > pre code .line.cbp-highlighted {
 		background: rgba(99, 102, 241, 0.08); /* Soft premium indigo */
 		box-shadow: inset 4px 0 0 0 #6366f1; /* Left accent indigo line */
 	}
 
 	/* ---- Copy button ---- */
-	.cbp-copy-btn {
+	.cbp-wrapper .cbp-copy-btn {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2em;
-		height: 2em;
+		width: 2.25em;
+		height: 2.25em;
 		padding: 0;
 		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 4px;
+		border: 1px solid rgba(127, 127, 127, 0.25);
+		border-radius: 6px;
 		cursor: pointer;
-		color: rgba(255, 255, 255, 0.6);
+		color: inherit;
+		opacity: 0.65;
 		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	.cbp-copy-btn:focus-visible {
+	.cbp-wrapper .cbp-copy-btn:focus-visible {
 		outline: 2px solid #6366f1;
 		outline-offset: 2px;
 	}
 
-	.cbp-copy-btn:hover {
-		color: #ffffff;
-		background: rgba(255, 255, 255, 0.15);
-		border-color: rgba(255, 255, 255, 0.2);
+	.cbp-wrapper .cbp-copy-btn:hover {
+		opacity: 1;
+		background: rgba(127, 127, 127, 0.15);
+		border-color: rgba(127, 127, 127, 0.4);
 		transform: scale(1.05);
 	}
 
-	.cbp-copy-btn:active {
+	.cbp-wrapper .cbp-copy-btn:active {
 		transform: scale(0.95);
 	}
 
-	.cbp-icon-check {
+	.cbp-wrapper .cbp-icon-check {
 		display: none;
 	}
 
-	.cbp-copy-btn.cbp-copied .cbp-icon-copy {
+	.cbp-wrapper .cbp-copy-btn.cbp-copied .cbp-icon-copy {
 		display: none;
 	}
 
-	.cbp-copy-btn.cbp-copied .cbp-icon-check {
+	.cbp-wrapper .cbp-copy-btn.cbp-copied .cbp-icon-check {
 		display: block;
 		color: #4ade80;
 	}
