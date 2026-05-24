@@ -1,5 +1,7 @@
 ---
 import { highlightCode } from "../utils/highlighter.js";
+import { parseLineHighlights } from "../utils/parseLineHighlights.js";
+import { DEFAULT_THEME } from "../constants.js";
 
 function escapeHtml(str: string): string {
 	return str
@@ -17,10 +19,10 @@ interface CodeBlockProNode {
 	language?: string;
 	theme?: string;
 	filename?: string;
-	lineNumbers?: boolean;
-	startingLineNumber?: number | string;
+	lineNumbers?: boolean | string;
+	startingLineNumber?: string;
 	lineHighlights?: string;
-	copyButton?: boolean;
+	copyButton?: boolean | string;
 	maxHeight?: string;
 }
 
@@ -28,16 +30,14 @@ const node: CodeBlockProNode = Astro.props.node;
 const {
 	code = "",
 	language = "text",
-	theme = "github-dark",
+	theme = DEFAULT_THEME,
 	filename,
 	lineNumbers = false,
-	startingLineNumber = 1,
+	startingLineNumber,
 	lineHighlights = "",
 	copyButton = true,
 	maxHeight,
 } = node;
-
-import { parseLineHighlights } from "../utils/parseLineHighlights.js";
 
 const highlightedLineNumbers = parseLineHighlights(lineHighlights);
 
@@ -89,7 +89,7 @@ if (highlightedLineNumbers.size > 0) {
 }
 
 // Post-process: add custom starting line number if enabled and startNumber != 1
-const startNumber = parseInt(String(startingLineNumber), 10) || 1;
+const startNumber = parseInt(String(startingLineNumber ?? "1"), 10) || 1;
 if (lineNumbers && startNumber !== 1) {
 	highlightedHtml = highlightedHtml.replace(
 		/<code([^>]*)>/g,

@@ -1,7 +1,11 @@
 import { createHighlighter, type Highlighter } from "shiki";
 import { createJavaScriptRegexEngine } from "@shikijs/engine-javascript";
+import { LANGUAGE_VALUES, THEME_VALUES } from "../constants.js";
 
-// Map of statically analyzable theme imports for Vite to bundle them as chunks
+/**
+ * Map of statically analyzable theme imports for Vite to bundle them as chunks.
+ * Each key matches a value from THEMES in constants.ts.
+ */
 const THEME_MAP: Record<string, () => Promise<any>> = {
   "github-dark": () => import("shiki/themes/github-dark.mjs"),
   "github-light": () => import("shiki/themes/github-light.mjs"),
@@ -29,31 +33,6 @@ const THEME_MAP: Record<string, () => Promise<any>> = {
   "vitesse-light": () => import("shiki/themes/vitesse-light.mjs"),
 };
 
-// Common languages for the JS engine
-const LANGUAGES = [
-  "javascript",
-  "typescript",
-  "python",
-  "rust",
-  "go",
-  "json",
-  "html",
-  "css",
-  "bash",
-  "shell",
-  "sql",
-  "yaml",
-  "markdown",
-  "java",
-  "c",
-  "cpp",
-  "csharp",
-  "php",
-  "ruby",
-  "swift",
-  "text",
-] as const;
-
 let highlighterPromise: Promise<Highlighter> | null = null;
 
 /**
@@ -66,7 +45,7 @@ export function getHighlighter(): Promise<Highlighter> {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
       themes: ["github-dark"], // Initial baseline theme
-      langs: [...LANGUAGES],
+      langs: [...LANGUAGE_VALUES],
       engine: createJavaScriptRegexEngine(),
     });
   }
@@ -117,4 +96,3 @@ export async function highlightCode(
     theme: theme || "github-dark",
   });
 }
-
