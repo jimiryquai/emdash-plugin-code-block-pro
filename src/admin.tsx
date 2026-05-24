@@ -2,16 +2,61 @@
 /** @jsx React.createElement */
 import React from "react";
 
-export function CodeBlockProEditor() {
+export interface CodeBlockProData {
+  code?: string;
+  language?: string;
+  theme?: string;
+  filename?: string;
+  lineNumbers?: boolean;
+  startingLineNumber?: string;
+  lineHighlights?: string;
+  copyButton?: boolean;
+  maxHeight?: string;
+}
+
+export function CodeBlockProEditor({
+  value,
+  onChange,
+}: {
+  value?: string | CodeBlockProData;
+  onChange?: (v: string) => void;
+}) {
+  const data = React.useMemo<CodeBlockProData>(() => {
+    if (!value) return {};
+    if (typeof value === "object") return value;
+    try {
+      return JSON.parse(value);
+    } catch {
+      return {};
+    }
+  }, [value]);
+
+  const updateField = (key: keyof CodeBlockProData, val: any) => {
+    if (onChange) {
+      const next = { ...data, [key]: val };
+      onChange(JSON.stringify(next));
+    }
+  };
+
   return (
     <div>
       <div>
         <label htmlFor="code">Code</label>
-        <textarea id="code" name="code" />
+        <textarea
+          id="code"
+          name="code"
+          value={data.code ?? ""}
+          onChange={(e) => updateField("code", e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="language">Language</label>
-        <select id="language" name="language">
+        <select
+          id="language"
+          name="language"
+          value={data.language ?? "javascript"}
+          onChange={(e) => updateField("language", e.target.value)}
+        >
           <option value="javascript">JavaScript</option>
           <option value="typescript">TypeScript</option>
           <option value="python">Python</option>
@@ -28,7 +73,12 @@ export function CodeBlockProEditor() {
       </div>
       <div>
         <label htmlFor="theme">Theme</label>
-        <select id="theme" name="theme">
+        <select
+          id="theme"
+          name="theme"
+          value={data.theme ?? "github-dark"}
+          onChange={(e) => updateField("theme", e.target.value)}
+        >
           <option value="github-dark">GitHub Dark</option>
           <option value="github-light">GitHub Light</option>
           <option value="dracula">Dracula</option>
@@ -57,27 +107,63 @@ export function CodeBlockProEditor() {
       </div>
       <div>
         <label htmlFor="filename">Filename</label>
-        <input id="filename" name="filename" type="text" />
+        <input
+          id="filename"
+          name="filename"
+          type="text"
+          value={data.filename ?? ""}
+          onChange={(e) => updateField("filename", e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="lineNumbers">Line numbers</label>
-        <input id="lineNumbers" name="lineNumbers" type="checkbox" />
+        <input
+          id="lineNumbers"
+          name="lineNumbers"
+          type="checkbox"
+          checked={data.lineNumbers ?? false}
+          onChange={(e) => updateField("lineNumbers", e.target.checked)}
+        />
       </div>
       <div>
         <label htmlFor="startingLineNumber">Starting line number</label>
-        <input id="startingLineNumber" name="startingLineNumber" type="text" />
+        <input
+          id="startingLineNumber"
+          name="startingLineNumber"
+          type="text"
+          value={data.startingLineNumber ?? ""}
+          onChange={(e) => updateField("startingLineNumber", e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="lineHighlights">Line highlights</label>
-        <input id="lineHighlights" name="lineHighlights" type="text" />
+        <input
+          id="lineHighlights"
+          name="lineHighlights"
+          type="text"
+          value={data.lineHighlights ?? ""}
+          onChange={(e) => updateField("lineHighlights", e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="copyButton">Copy button</label>
-        <input id="copyButton" name="copyButton" type="checkbox" />
+        <input
+          id="copyButton"
+          name="copyButton"
+          type="checkbox"
+          checked={data.copyButton ?? false}
+          onChange={(e) => updateField("copyButton", e.target.checked)}
+        />
       </div>
       <div>
         <label htmlFor="maxHeight">Max height</label>
-        <input id="maxHeight" name="maxHeight" type="text" />
+        <input
+          id="maxHeight"
+          name="maxHeight"
+          type="text"
+          value={data.maxHeight ?? ""}
+          onChange={(e) => updateField("maxHeight", e.target.value)}
+        />
       </div>
     </div>
   );

@@ -45,13 +45,13 @@ const THEMES = [
 
 const blockFields = [
   { type: "text_input", action_id: "code", label: "Code", multiline: true },
-  { type: "select" as const, action_id: "language", label: "Language", options: LANGUAGES },
-  { type: "select" as const, action_id: "theme", label: "Theme", options: THEMES },
+  { type: "select" as const, action_id: "language", label: "Language", options: LANGUAGES, initial_value: "javascript" },
+  { type: "select" as const, action_id: "theme", label: "Theme", options: THEMES, initial_value: "github-dark" },
   { type: "text_input", action_id: "filename", label: "Filename" },
-  { type: "toggle", action_id: "lineNumbers", label: "Show line numbers" },
+  { type: "toggle", action_id: "lineNumbers", label: "Show line numbers", initial_value: false },
   { type: "text_input", action_id: "startingLineNumber", label: "Starting line number (default: 1)" },
   { type: "text_input", action_id: "lineHighlights", label: "Highlight lines (e.g. 1,3-5)" },
-  { type: "toggle", action_id: "copyButton", label: "Show copy button" },
+  { type: "toggle", action_id: "copyButton", label: "Show copy button", initial_value: true },
   { type: "text_input", action_id: "maxHeight", label: "Max height (e.g. 400px)" },
 ];
 

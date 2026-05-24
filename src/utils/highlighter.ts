@@ -1,33 +1,33 @@
 import { createHighlighter, type Highlighter } from "shiki";
 import { createJavaScriptRegexEngine } from "@shikijs/engine-javascript";
 
-// Supported themes (must be pre-loaded for the JS engine)
-const THEMES = [
-  "github-dark",
-  "github-light",
-  "dracula",
-  "nord",
-  "one-dark-pro",
-  "solarized-dark",
-  "solarized-light",
-  "monokai",
-  "synthwave-84",
-  "tokyo-night",
-  "night-owl",
-  "rose-pine",
-  "rose-pine-moon",
-  "rose-pine-dawn",
-  "ayu-dark",
-  "light-plus",
-  "dark-plus",
-  "material-theme",
-  "material-theme-darker",
-  "material-theme-lighter",
-  "material-theme-palenight",
-  "poimandres",
-  "vitesse-dark",
-  "vitesse-light",
-] as const;
+// Map of statically analyzable theme imports for Vite to bundle them as chunks
+const THEME_MAP: Record<string, () => Promise<any>> = {
+  "github-dark": () => import("shiki/themes/github-dark.mjs"),
+  "github-light": () => import("shiki/themes/github-light.mjs"),
+  "dracula": () => import("shiki/themes/dracula.mjs"),
+  "nord": () => import("shiki/themes/nord.mjs"),
+  "one-dark-pro": () => import("shiki/themes/one-dark-pro.mjs"),
+  "solarized-dark": () => import("shiki/themes/solarized-dark.mjs"),
+  "solarized-light": () => import("shiki/themes/solarized-light.mjs"),
+  "monokai": () => import("shiki/themes/monokai.mjs"),
+  "synthwave-84": () => import("shiki/themes/synthwave-84.mjs"),
+  "tokyo-night": () => import("shiki/themes/tokyo-night.mjs"),
+  "night-owl": () => import("shiki/themes/night-owl.mjs"),
+  "rose-pine": () => import("shiki/themes/rose-pine.mjs"),
+  "rose-pine-moon": () => import("shiki/themes/rose-pine-moon.mjs"),
+  "rose-pine-dawn": () => import("shiki/themes/rose-pine-dawn.mjs"),
+  "ayu-dark": () => import("shiki/themes/ayu-dark.mjs"),
+  "light-plus": () => import("shiki/themes/light-plus.mjs"),
+  "dark-plus": () => import("shiki/themes/dark-plus.mjs"),
+  "material-theme": () => import("shiki/themes/material-theme.mjs"),
+  "material-theme-darker": () => import("shiki/themes/material-theme-darker.mjs"),
+  "material-theme-lighter": () => import("shiki/themes/material-theme-lighter.mjs"),
+  "material-theme-palenight": () => import("shiki/themes/material-theme-palenight.mjs"),
+  "poimandres": () => import("shiki/themes/poimandres.mjs"),
+  "vitesse-dark": () => import("shiki/themes/vitesse-dark.mjs"),
+  "vitesse-light": () => import("shiki/themes/vitesse-light.mjs"),
+};
 
 // Common languages for the JS engine
 const LANGUAGES = [
@@ -65,7 +65,7 @@ let highlighterPromise: Promise<Highlighter> | null = null;
 export function getHighlighter(): Promise<Highlighter> {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
-      themes: [...THEMES],
+      themes: ["github-dark"], // Initial baseline theme
       langs: [...LANGUAGES],
       engine: createJavaScriptRegexEngine(),
     });
@@ -96,11 +96,18 @@ export async function highlightCode(
     }
   }
 
-  // Load theme on demand if not pre-loaded
+  // Load theme on demand using the static dynamic imports map
   if (!highlighter.getLoadedThemes().includes(theme as any)) {
     try {
-      await highlighter.loadTheme(theme as any);
-    } catch {
+      const loadThemeFn = THEME_MAP[theme];
+      if (loadThemeFn) {
+        const themeMod = await loadThemeFn();
+        await highlighter.loadTheme(themeMod.default || themeMod);
+      } else {
+        await highlighter.loadTheme(theme as any);
+      }
+    } catch (err) {
+      console.error(`[code-block-pro] Failed to load theme "${theme}":`, err);
       theme = "github-dark";
     }
   }
@@ -110,3 +117,4 @@ export async function highlightCode(
     theme: theme || "github-dark",
   });
 }
+
