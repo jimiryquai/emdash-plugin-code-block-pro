@@ -67,7 +67,7 @@ export function codeBlockProPlugin(options?: {
  *   `import { createPlugin } from "<entrypoint>"; createPlugin({})`
  * at runtime. This must return a PluginDefinition (not a PluginDescriptor).
  */
-export function createPlugin(options?: { defaultTheme?: string }) {
+export function createPlugin(_options?: { defaultTheme?: string }) {
   return definePlugin({
     id: "code-block-pro",
     version: "0.1.0",

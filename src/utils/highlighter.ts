@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createHighlighter, type Highlighter } from "shiki";
 import { createJavaScriptRegexEngine } from "@shikijs/engine-javascript";
-import { LANGUAGE_VALUES, THEME_VALUES } from "../constants.js";
+import { LANGUAGE_VALUES } from "../constants.js";
 
 /**
  * Map of statically analyzable theme imports for Vite to bundle them as chunks.

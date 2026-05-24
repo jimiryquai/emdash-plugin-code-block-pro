@@ -1,7 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx React.createElement */
-import React from "react";
-
 export interface CodeBlockProData {
   code?: string;
   language?: string;
