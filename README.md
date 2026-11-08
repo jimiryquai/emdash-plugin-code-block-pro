@@ -2,11 +2,14 @@
 
 A professional, feature-rich syntax highlighting plugin for [EmDash CMS](https://emdashcms.com). Powered by Shiki and optimized for edge rendering environments (e.g. Cloudflare Workers) by running on a pure JavaScript regex engine without WebAssembly.
 
-![Premium Code Block Design](https://raw.githubusercontent.com/jimiryquai/emdash-plugin-code-block-pro/main/docs/assets/preview.png)
+This is a **native** plugin for **EmDash 1.4+**. EmDash requires a native plugin to supply Astro Portable Text rendering components through `componentsEntry`. Install it from npm and register it in the site's Astro configuration. See [EmDash's native renderer guide](https://docs.emdashcms.com/plugins/creating-native-plugins/portable-text-components/).
+
+![Premium Code Block Design](docs/assets/preview.png)
 
 ## Features
 
 - ⚡ **Zero Client Overhead**: Renders static HTML on the server. No framework runtimes or heavy libraries are shipped to the client browser.
+- 📝 **Plain Text and Mermaid**: Choose plain text or syntax-highlighted Mermaid source in the editor.
 - 🎨 **VS Code Quality Syntax Highlighting**: Powered by Shiki with 20+ preloaded premium themes (Tokyo Night, Rosé Pine, Synthwave '84, Monokai, Ayu, Dracula, and more).
 - ⚙️ **Cloudflare Workers Compatible**: Uses `@shikijs/engine-javascript` to perform syntax highlighting entirely in JavaScript. Avoids `WebAssembly.instantiate()`, which is prohibited in Cloudflare Worker environments.
 - 📋 **Integrated Header Toolbar**: Automatically displays the code language badge and filename on the left, and a sleek copy-to-clipboard button on the right (keeping code text completely unobstructed).
@@ -32,41 +35,49 @@ pnpm add emdash-plugin-code-block-pro shiki @shikijs/engine-javascript
 
 ### 1. Register the Plugin (CMS Side)
 
-In your `emdash.config.ts` (or wherever your EmDash plugin registry is configured), import and register the plugin:
+In `astro.config.mjs`, add the descriptor to your existing EmDash integration's `plugins` array:
 
-```typescript
-import { defineConfig } from "emdash";
+```javascript
+import { defineConfig } from "astro/config";
+import emdash from "emdash/astro";
+import { sqlite } from "emdash/db";
 import { codeBlockProPlugin } from "emdash-plugin-code-block-pro";
 
 export default defineConfig({
-  // ... other configs
-  plugins: [
-    codeBlockProPlugin({
-      defaultTheme: "github-dark", // Optional: specify a fallback theme
+  integrations: [
+    emdash({
+      database: sqlite({ url: "file:./emdash.db" }),
+      plugins: [codeBlockProPlugin({ defaultTheme: "github-dark" })],
     }),
   ],
 });
 ```
 
-This registers the block type in the EmDash editor layout under **Code Block Pro** with custom options for themes, languages, filenames, starting line numbers, line highlights, and copy controls.
+Keep your site's existing database, adapter and other integrations. The plugin registers **Code Block Pro** in the editor with themes, languages, filenames, starting line numbers, line highlights, and copy controls.
 
 ### 2. Render the Block (Site Side)
 
-Import the Astro rendering components from the plugin's `astro` export and pass them to the Portable Text renderer:
+EmDash automatically loads `blockComponents` from the descriptor's `componentsEntry` and merges them into its Portable Text renderer:
 
 ```astro
 ---
-// src/components/MyPortableText.astro
-import { PortableText } from "astro-portabletext";
-import { blockComponents } from "emdash-plugin-code-block-pro/astro";
-
-interface Props {
-  value: any[];
-}
+import { PortableText } from "emdash/ui";
 const { value } = Astro.props;
 ---
 
-<PortableText value={value} components={blockComponents} />
+<PortableText value={value} />
+```
+
+If your site uses `astro-portabletext` directly, register the map explicitly:
+
+```astro
+---
+import { PortableText } from "astro-portabletext";
+import { blockComponents } from "emdash-plugin-code-block-pro/astro";
+const { value } = Astro.props;
+---
+
+<PortableText value={value} components={{ type: blockComponents }} />
 ```
 
 ---
@@ -82,6 +93,10 @@ codeBlockProPlugin({
 ```
 
 ---
+
+## Release 0.2.0
+
+The EmDash peer range is now `^1.4.0`. Raising this minimum is a breaking change, so this pre-1.0 release increments the minor version from 0.1.0 to 0.2.0. The release also brings back the site's Plain Text and Mermaid choices, foreground-color correction, and scrollbar styling. Plugin instances now keep their theme defaults independent, including when EmDash creates the native runtime.
 
 ## Development
 

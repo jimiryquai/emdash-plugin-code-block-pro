@@ -1,6 +1,6 @@
 {
   "name": "emdash-plugin-code-block-pro",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "test": "vitest run",
@@ -16,7 +16,7 @@
   "peerDependencies": {
     "@shikijs/engine-javascript": "^4.0.0",
     "@types/react": "^18.0.0",
-    "emdash": "^0.14.0",
+    "emdash": "^1.4.0",
     "react": "^18.0.0",
     "shiki": "^4.0.0"
   },
@@ -31,7 +31,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^18.0.0",
     "astro": "^6.0.0",
-    "emdash": "^0.14.0",
+    "emdash": "^1.4.0",
     "eslint": "^9.0.0",
     "happy-dom": "^20.9.0",
     "react": "^18.0.0",
@@ -46,5 +46,20 @@
       "better-sqlite3",
       "esbuild"
     ]
+  },
+  "files": [
+    "src",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimiryquai/emdash-plugin-code-block-pro.git"
+  },
+  "homepage": "https://github.com/jimiryquai/emdash-plugin-code-block-pro#readme",
+  "bugs": {
+    "url": "https://github.com/jimiryquai/emdash-plugin-code-block-pro/issues"
   }
 }
