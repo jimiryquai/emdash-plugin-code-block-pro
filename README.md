@@ -4,7 +4,7 @@ A professional, feature-rich syntax highlighting plugin for [EmDash CMS](https:/
 
 This is a **native** plugin for **EmDash 1.4+**. EmDash requires a native plugin to supply Astro Portable Text rendering components through `componentsEntry`. Install it from npm and register it in the site's Astro configuration. See [EmDash's native renderer guide](https://docs.emdashcms.com/plugins/creating-native-plugins/portable-text-components/).
 
-![Premium Code Block Design](https://raw.githubusercontent.com/jimiryquai/emdash-plugin-code-block-pro/main/docs/assets/preview.png)
+![Premium Code Block Design](docs/assets/preview.png)
 
 ## Features
 

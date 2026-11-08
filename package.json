@@ -52,5 +52,14 @@
     "docs",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimiryquai/emdash-plugin-code-block-pro.git"
+  },
+  "homepage": "https://github.com/jimiryquai/emdash-plugin-code-block-pro#readme",
+  "bugs": {
+    "url": "https://github.com/jimiryquai/emdash-plugin-code-block-pro/issues"
+  }
 }
