@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { codeBlockProPlugin } from "../index.js";
+import { codeBlockProPlugin, createPlugin } from "../index.js";
 
 describe("codeBlockProPlugin descriptor — portableTextBlocks", () => {
   const descriptor = codeBlockProPlugin();
@@ -7,6 +7,36 @@ describe("codeBlockProPlugin descriptor — portableTextBlocks", () => {
   it("has a portableTextBlocks array", () => {
     expect(descriptor).toHaveProperty("portableTextBlocks");
     expect(Array.isArray(descriptor.portableTextBlocks)).toBe(true);
+  });
+
+  it("registers the native renderer and the 0.2.0 runtime", () => {
+    expect(descriptor).toMatchObject({
+      format: "native", version: "0.2.0",
+      entrypoint: "emdash-plugin-code-block-pro",
+      componentsEntry: "emdash-plugin-code-block-pro/astro",
+    });
+    const runtime = createPlugin();
+    expect(runtime.version).toBe("0.2.0");
+    expect(runtime.admin?.portableTextBlocks).toEqual(descriptor.portableTextBlocks);
+  });
+
+  it("keeps theme defaults isolated and passes options to the native runtime", () => {
+    const custom = codeBlockProPlugin({ defaultTheme: "nord" });
+    const runtime = createPlugin(custom.options);
+    const fresh = codeBlockProPlugin();
+    const theme = (blocks: typeof descriptor.portableTextBlocks) =>
+      blocks[0].fields!.find((field) => field.action_id === "theme");
+    expect(theme(custom.portableTextBlocks)).toMatchObject({ initial_value: "nord" });
+    expect(theme(runtime.admin!.portableTextBlocks!)).toMatchObject({ initial_value: "nord" });
+    expect(theme(fresh.portableTextBlocks)).toMatchObject({ initial_value: "github-dark" });
+  });
+
+  it("offers Plain Text and Mermaid in the editor", () => {
+    const language = descriptor.portableTextBlocks[0].fields!.find((field) => field.action_id === "language");
+    expect(language).toMatchObject({ options: expect.arrayContaining([
+      { label: "Plain Text", value: "text" },
+      { label: "Mermaid Diagram", value: "mermaid" },
+    ]) });
   });
 
   describe("code-block-pro block type", () => {

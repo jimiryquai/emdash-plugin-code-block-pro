@@ -16,6 +16,8 @@ export const LANGUAGES = [
   { label: "SQL", value: "sql" },
   { label: "Markdown", value: "markdown" },
   { label: "YAML", value: "yaml" },
+  { label: "Plain Text", value: "text" },
+  { label: "Mermaid Diagram", value: "mermaid" },
 ] as const;
 
 export const THEMES = [

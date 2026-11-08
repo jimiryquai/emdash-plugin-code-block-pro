@@ -10,6 +10,14 @@ describe("CodeBlockPro.astro — real Astro rendering", () => {
 		container = await AstroContainer.create();
 	});
 
+	it("uses the Shiki foreground for Plain Text instead of the background", async () => {
+		const html = await container.renderToString(CodeBlockPro as AstroComponentFactory, {
+			props: { node: { _type: "code-block-pro", code: "plain <text>", language: "text", theme: "github-dark" } },
+		});
+		expect(html).toContain("--cbp-theme-fg: #e1e4e8");
+		expect(html).toContain("plain &#x3C;text>");
+	});
+
 	it("renders Shiki-highlighted code", async () => {
 		const html = await container.renderToString(CodeBlockPro as AstroComponentFactory, {
 			props: {

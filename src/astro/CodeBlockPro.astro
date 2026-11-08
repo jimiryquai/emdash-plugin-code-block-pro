@@ -63,7 +63,7 @@ const bgMatch = highlightedHtml.match(/background-color:\s*([^;"]+)/);
 if (bgMatch) {
 	themeBg = bgMatch[1].trim();
 }
-const fgMatch = highlightedHtml.match(/color:\s*([^;"]+)/);
+const fgMatch = highlightedHtml.match(/(?<!-)color:\s*([^;"]+)/);
 if (fgMatch) {
 	themeFg = fgMatch[1].trim();
 }
@@ -243,6 +243,11 @@ const isDark = isThemeDark(themeBg);
 		--cbp-btn-hover-bg: rgba(127, 127, 127, 0.12);
 		--cbp-btn-hover-border: rgba(127, 127, 127, 0.3);
 		--cbp-btn-hover-fg: inherit;
+
+		/* Scrollbar customization variables */
+		--cbp-scrollbar-track: rgba(127, 127, 127, 0.05);
+		--cbp-scrollbar-thumb: rgba(127, 127, 127, 0.3);
+		--cbp-scrollbar-thumb-hover: rgba(127, 127, 127, 0.45);
 	}
 
 	.cbp-wrapper.cbp-theme-dark {
@@ -257,6 +262,10 @@ const isDark = isThemeDark(themeBg);
 		--cbp-btn-hover-bg: rgba(255, 255, 255, 0.12);
 		--cbp-btn-hover-border: rgba(255, 255, 255, 0.3);
 		--cbp-btn-hover-fg: #ffffff;
+
+		--cbp-scrollbar-track: rgba(0, 0, 0, 0.22);
+		--cbp-scrollbar-thumb: rgba(255, 255, 255, 0.25);
+		--cbp-scrollbar-thumb-hover: rgba(255, 255, 255, 0.4);
 	}
 
 	.cbp-wrapper.cbp-theme-light {
@@ -271,6 +280,10 @@ const isDark = isThemeDark(themeBg);
 		--cbp-btn-hover-bg: rgba(0, 0, 0, 0.08);
 		--cbp-btn-hover-border: rgba(0, 0, 0, 0.25);
 		--cbp-btn-hover-fg: rgba(0, 0, 0, 0.95);
+
+		--cbp-scrollbar-track: rgba(0, 0, 0, 0.04);
+		--cbp-scrollbar-thumb: rgba(0, 0, 0, 0.2);
+		--cbp-scrollbar-thumb-hover: rgba(0, 0, 0, 0.35);
 	}
 
 	/* ---- Header (filename tab & toolbar) ---- */
@@ -332,6 +345,32 @@ const isDark = isThemeDark(themeBg);
 
 	.cbp-wrapper .cbp-scroll {
 		overflow: auto;
+		scrollbar-width: thin;
+		scrollbar-color: var(--cbp-scrollbar-thumb) var(--cbp-scrollbar-track);
+	}
+
+	/* Custom scrollbar styling for WebKit browsers */
+	.cbp-wrapper .cbp-scroll::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	.cbp-wrapper .cbp-scroll::-webkit-scrollbar-track {
+		background: var(--cbp-scrollbar-track);
+		border-radius: 4px;
+	}
+
+	.cbp-wrapper .cbp-scroll::-webkit-scrollbar-thumb {
+		background: var(--cbp-scrollbar-thumb);
+		border-radius: 4px;
+		border: 2px solid transparent;
+		background-clip: padding-box;
+	}
+
+	.cbp-wrapper .cbp-scroll::-webkit-scrollbar-thumb:hover {
+		background: var(--cbp-scrollbar-thumb-hover);
+		border: 2px solid transparent;
+		background-clip: padding-box;
 	}
 
 	.cbp-wrapper .cbp-scroll > pre {
@@ -352,6 +391,11 @@ const isDark = isThemeDark(themeBg);
 		padding: 0 !important;
 		border: none !important;
 		border-radius: 0 !important;
+		color: var(--cbp-theme-fg) !important;
+	}
+
+	.cbp-wrapper .cbp-scroll > pre code span:not([style]) {
+		color: var(--cbp-theme-fg);
 	}
 
 	.cbp-wrapper .cbp-scroll > pre code .line {
