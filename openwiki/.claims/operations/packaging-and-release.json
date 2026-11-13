@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:2b0a653b69d52181681a730044b5c5eaed189fd2bb5bec5ae7b2d1d35fb43f5a",
+  "claims": [
+    {
+      "id": "claim_3d6fcd4833d3491ebc2bf53c92117c35",
+      "statement": "The package is ESM and ships TypeScript source through three exports (., ./admin, ./astro) with peer dependencies emdash ^1.4.0, shiki ^4.0.0, @shikijs/engine-javascript ^4.0.0, and react/@types/react ^18.0.0, and a files allowlist of src, docs, README.md, and LICENSE that excludes the sandbox machinery.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L4-L56",
+          "version": "repo-lines-v1:sha256:207f8f22f69ab34e6f750da9c5175692531ba28b18477cb3fec63190a6b93ed6:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1NmQ4MzA5MGM2ZmI5MzQ2M2FkNGYyZjg1ZjhjYTU1NzZmN2U4NWUxMjFkOTU4YTUzNzE4ZTIxZDlmNzZlNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2NGQ4YzA3MzQyOTg5MzEwMTU3NmQ4OGQ5OTEyN2U4OWQ2ODkxZDNiMTdlODlkZjAyZWM5YWU3MDcwNWQ4YmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0ZGQ0MTY3ZDRhZDIwMTcwMmJmNDQ3MTJhMzNhMTYxYTVjNjNkZGU4NTgyYjEyNDc4YjViOWM1YmJkOTFhNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2OTU3YTRkM2JkNTkyMmE3NjY1ODRmOWUyODI4MmM1NWUzZTc4MDJmYjBlZWZjMDFjMTgyZjlhOTAxZWYyOWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9fd554de517f421c9d03ba5846472c6d",
+      "statement": "Release 0.2.0 raised the EmDash peer range to ^1.4.0; because raising the minimum is a breaking change, this pre-1.0 release incremented the minor version from 0.1.0 to 0.2.0, and it also restored Plain Text and Mermaid choices, fixed foreground color, added scrollbar styling, and made plugin instances keep independent theme defaults.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L82-L85",
+          "version": "repo-lines-v1:sha256:23a14c14a44f2c871858cc74a244a16fd19d0ad7546f2ecf7001212b89a68f38:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmY3MGQ5ZWJlMGMwYWNiY2UzNWMyYmUzMDBiODkxZmY1MTM1Y2NiZDc1MTY3MDUxZjY0YjRkOTViY2YzOWQzMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDFjNjVjMDFiYjg5MjdkMjI4NWMyZGQyOTNkNmFlZDRjMzc4NWU1OThjYmEyYjU5ZGJjNGViY2RjYmI1ZGFjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDNiODlmMWViY2I4YjA5ZmExYzY0NDhhOTI1MWJiZjNjNmU0NjBhY2E2NWE4NDMwN2EwMDNlODM3ZjhjNDQwZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d359348edf3749d88bbbd59e90dcd37d",
+      "statement": "Three CI gate workflows trigger on push and pull request to master and run on Node 22 with npm ci --legacy-peer-deps: ci.yml runs tsc --noEmit, lint.yml runs eslint src/, and test.yml runs vitest run.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L1-L16",
+          "version": "repo-lines-v1:sha256:4a3dfe486236c74eef5b3ab0d91301041a7d4efb8f794909c939345c12ea0ab1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2ZTFiMzJmYTA5MDc5YWUyZjAwMDFmZmYwZWNhMjdiNDk4NTk1N2Q0ZWI0ODU3OTI5YjNjZjA1OGZhYWU1NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiMzJiOTg3MjYzZGYyMTYzZTcyNmQ0OGI5MmY2Zjk2NTE0OGNiNmI2ZDI4MzE3OTE1MTRjOTM5ZjgzN2ExNDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMyMzE0OThhNWEzNTc2OTNhZGU0ODg2NmYwZmE5ZTI0ZGY4MDIyYTRkYzU3ZmRlZDNkNTllYjNlODNhMTczZWQifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/lint.yml#L1-L16",
+          "version": "repo-lines-v1:sha256:4b1c2733fa726083836bd3b546c2dd52b0a358a0e31192870eeb0b469705ad06:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1MzM0YWQwZWM3MGU5NWE5ZmUwMzE2NjlhNGIwNTAyMzJmOTcyZDc2YzQyY2JjM2JmM2UzNWEzNTE5ZTQxNmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiMzJiOTg3MjYzZGYyMTYzZTcyNmQ0OGI5MmY2Zjk2NTE0OGNiNmI2ZDI4MzE3OTE1MTRjOTM5ZjgzN2ExNDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzNDczMjgxMWNmOTNlYmU1ZWE0ZWNlMjUwNjk2N2MxNjg3OTQ4ZjZkNjk2NmE1YmIzZjU1ODY2NDcxZTU4NDgifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/test.yml#L1-L16",
+          "version": "repo-lines-v1:sha256:e3955ca487b1b00464f3680e0922e08389091d4ef88b4380f6451c0bac487abc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlZDA1MjM5YWFlMGUwNTcyMmY4NzYxYjYzYzI4YzdmN2Q0ZjQ5NjcxY2ZjYjMzYTY5ODNjZDQ4Y2I2N2JkNWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiMzJiOTg3MjYzZGYyMTYzZTcyNmQ0OGI5MmY2Zjk2NTE0OGNiNmI2ZDI4MzE3OTE1MTRjOTM5ZjgzN2ExNDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwMzU0YjhhZTExMDQ5NGNjNjY0MzhjOTkzNzQ3MDNlYjE4NGNlNjBkNzZiNGZhMTQ3MjZlYmUwMjc3ZDA5ODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_18655988fd4540ba8ee0176c76da0ba6",
+      "statement": "security.yml runs npm audit --audit-level=high --omit=dev after an npm i --package-lock-only --legacy-peer-deps, triggering on push and pull requests to any branch plus a weekly Monday 6 AM cron schedule.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/security.yml#L1-L20",
+          "version": "repo-lines-v1:sha256:755408601ba15829ce60f428e352cbaaae077113a8369328c999826968607ca4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmNTBkOGMyZjg5ZDNkY2Q4ZjdhMzU5NTA4YTk5MzAzYzY1YWNmYTVkMmNiYmYxNDBkNzBhNTNjZjYxYWY2MzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2Y2Q1YjkyNGNjN2Y2NDQyMmYxY2MzZDlmZjY1ODcxNmI1MjkxZDMxYTBmNjhhOGFiYWU3ZjJlNWE5ZTY3MGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a281305c0ced41fbb36b4eb3d8857bdf",
+      "statement": "publish.yml triggers only on a published GitHub release; it installs npm@11.21.1 globally because trusted publishing (OIDC) requires npm 11.5.1+ while Node 22 bundles npm 10 which never attempts OIDC login, then runs npm publish --provenance --access public with permissions contents: read and id-token: write.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/publish.yml#L1-L23",
+          "version": "repo-lines-v1:sha256:d9aa0e9f74023db71960c4c7073395cf9c2589c12eeb011841b7d564a34788e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYjZlZmI1ZTMwNThkNmYwODhiYTk3ZGVjN2Y1MThmMDM5NDczMzk5YzEwZTVkNGIzNDg0NDc5ZGJhZTlhNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1OGNmMDQ4MDNiNTQ3YmVjZDU1MDhmY2U5MmE0NDRiZDFiM2Q5YzJhZTUzNmNmYmEyZDZiN2RiZjVjZDc3NjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}

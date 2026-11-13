@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5a7e0621e07c96ff173b11bc309106802d783498e97c8cfa203a96455f9f8f8e",
+  "claims": [
+    {
+      "id": "claim_022ad6252fca4e81b303dd8cd52b67a6",
+      "statement": "The npm package exports three entrypoints: . -> src/index.ts (descriptor and runtime), ./admin -> src/admin.tsx (CodeBlockProData type), and ./astro -> src/astro/index.ts (blockComponents for Portable Text rendering).",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L11-L14",
+          "version": "repo-lines-v1:sha256:7d7fd5efdc7f17ed73ea1d6e3bc9d3b29bc31ee26ee624ed8668a8ac108bcaf1:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2MwNWJiOWY0YThiOTg0NTEwZjgxNWE1ZmM0MDc4ZDc3YzVhMjBlOTNmMzM3M2RjNWRkZTRhMzQxZDFiNDBjOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTg1MDUwNWYzYWI5M2ZkYzM1NmE5MTkxMWFhODc4NmUxY2NjZDBkMTIxMzViOWM4YjJjYzk2NTQ1MTk1ZjUyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmVmMWEyNDlmZWRhZTFhZjZlODg3NDdlMTdlZGYzOGFmMmI3NGQzOWRmMWM4NDM2OWM2NDEwOWI1MzU4OGM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjI5NTMwYWMyYjcyMzQzNTQxYTVlNDE4NzdjY2E4ODYwOTZlNTRmMzMwMTg2OWI4YWM5OTFhMWViNDAwZThmMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0f9de2308fa44d2a95ccfc032ac693b8",
+      "statement": "codeBlockProPlugin returns a native PluginDescriptor with id code-block-pro, format native, version from package.json, entrypoint emdash-plugin-code-block-pro, componentsEntry emdash-plugin-code-block-pro/astro, and a portableTextBlocks array built from createBlockType(options).",
+      "evidence": [
+        {
+          "resource": "repo://src/index.ts#L38-L47",
+          "version": "repo-lines-v1:sha256:53e69b4e127691c5c2b8c79b2066eac4c78e559c015a5b42526c46c49622bde1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3MTA2NWIyODhjMzg4YTkxYmJmMTVjODA0NjliZTIwYjI5YmMzMmMzZmE4NzdkZjI4ZGU5ZWM4YTc2NjRlOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5YzE0YWU0OThmMzBmZTVhZGI4NGQzOTA4OGY1MGQwNjcxZGY4MDA1ZWJkMTNkZjVhNzg3NTljNzdkYjA2MmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjNGRiYjUwZDAxMTAyYmFjNjZhMzA2MjgzMTNjZGE0MGY1NjI4ZTcyMTQwNWNiNzVmYWUzMWYzZTVkNWFjODMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c5f0d0f94939464ab09adb1fb3b8138a",
+      "statement": "EmDash's virtual-module generator imports createPlugin from the entrypoint and calls it with empty options at runtime, so createPlugin must return a resolved plugin rather than a descriptor; it does so via definePlugin({ id, version, admin: { portableTextBlocks } }) using the same createBlockType.",
+      "evidence": [
+        {
+          "resource": "repo://src/index.ts#L49-L61",
+          "version": "repo-lines-v1:sha256:60083fae5a3345b4c4512b3c77f4665d8050d2e52382357061979e57f7911035:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhMDI5ZGFkMDM5ZTI3ZTVmYTZjZjc5OTEzMWFiYWZiZDY5NTU4MzFlY2I5NzExNjE2OTM3MzdmOTI0ZWQzZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM3OTI5ZTkxZTBmOTljM2U4MjVkZTY5YjQzNWZiNjQ4NGQxYjBhMWRmMmY0NjU2MWFiZjFhMjlmMDQxODhiODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e6b71f17df2240fca7c053ac4ec42f19",
+      "statement": "The end-to-end data flow is: the admin Block Kit form captures fields keyed by action_id; ProseMirror stores plugin blocks as pluginBlock nodes with { blockType, id, data }; pmToPortableText spreads data back to top-level keys producing { _type: code-block-pro, _key, code, language, ... }; astro-portabletext passes the block as the node prop to CodeBlockPro.astro.",
+      "evidence": [
+        {
+          "resource": "repo://docs/plans/fix-frontend-rendering.md#L16-L25",
+          "version": "repo-lines-v1:sha256:b9cce16bfa3534af1ae882e9d1b34d539b44cdf66074f182a2b28d121acc9491:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4YzBhZTA3NWE2MDRhMDQwNTk1YjJjZmFjZTkwNmZiYjU3NTI5OTRkOGE4ZGRiMzhmNDIwYzE4ODYyZTcyNmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkMmUxMDUyOTI2NzFhMTJkNWFlYzljMGE0Y2FhY2MwOWRlOTk1M2Q3YjliYjAzZDc5ZjNmNzEyMmY3MzU2YTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiMWFiNWM4MDc2NDgzYmM5OWEzMTIxNzljOWM2MjdmNWQ0YWI5ODc2NTkxMzM0YzAyNGYyMjEzMDdiMzdjNTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1ZDQ5OGM3OGM4M2NmODU3M2U4NTBhODk3M2Q1ZDZmN2FkOTE4N2VhMTlhMTEyZjUyMzU4YjI0M2Q5NjMxOWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b10b487f07c54dec9154c71489e33aef",
+      "statement": "The ./astro entry exports blockComponents as a one-key record mapping the block type name code-block-pro to the CodeBlockPro.astro component, which EmDash merges into its Portable Text renderer through componentsEntry.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/index.ts#L1-L6",
+          "version": "repo-lines-v1:sha256:55e8022e7216b74a945b0ecf640a1e41ee169f8ca06b298a4a69a16372ad412b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQzYzgyMjQxN2FhYmEyOWI4MjY4YmMyYWVlNjI4Yzk5YzVhZDQ3YTkwNTZmMzMzNjQ1NTg1ODE3ZGYzZTM1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5c370caea32446269dca1f5cd4ca3370",
+      "statement": "The plugin is a native EmDash 1.4+ plugin that renders entirely on the server with no framework runtime shipped to the client, targeting edge environments such as Cloudflare Workers.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L1-L8",
+          "version": "repo-lines-v1:sha256:bb8c98428e8c9a9789f1c98295511c5fe0a611505d34c8637f397a96c031d73d:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDA4MzcyMGU0YWFlOGM4MTE5M2JlYTI2ZWQxZjA5NWJmZDUyZTMzZjRjM2U3YWU4NmNkYTdkZGU2ZTYwNGM4YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzlhNzA4NjdhZTIzMjZmOTdlNGZkZDk0MzEwZDgzMzIzZDQzOGU4MWM3ZDU1OWZjZmI2YTExNGZkODBhYjdjOCJ9"
+        },
+        {
+          "resource": "repo://package.json#L16-L22",
+          "version": "repo-lines-v1:sha256:6a27781edf094fe29cb82c3c453cc599cdab398fe43e68a98b893b89ab841529:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTY0MWY3NmI1NzQ4YmYxZjA4ZTAyNDY3ZTllMmQ4ZmFhOTYxY2RkYTk3N2NjMThjZDNmMWU4Nzg0ZmQxZDcxYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2MzZTJhZTU5ZTcyOTBlMzdkZDUxYzc2YjRhYTk3MWJmM2IyYTVhYzdiYjFlYjYwYmNiMDdmNmE5MzQ0ZmNmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTU2MjQxYjcwYTcwNWJhYTIyMWZiMGYyMjFhMzMyMzVhYTM2NDQxODUxNjMzZTcyZDBmMTc1MzdlNjU1Y2M0NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:dcdc7f5a69351a6e610035111bc9bfd057b1fdeaabe0c5c1d44f30c6e024ab6e",
+  "claims": [
+    {
+      "id": "claim_3b8f88e80b384f01b73609f8f5ce1e2c",
+      "statement": "The plugin integrates on two sides: the CMS side registers codeBlockProPlugin in the EmDash integration plugins array in the site astro.config.mjs (supplying the block definition), and the site side gets blockComponents loaded from the descriptor componentsEntry (emdash-plugin-code-block-pro/astro) merged into EmDash Portable Text rendering.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L33-L77",
+          "version": "repo-lines-v1:sha256:0a88468835e2264a7548aa9f7981f787e62815d8cd31d8eb132efc0ea6558976:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMDczY2Y4ZjQ4YTM5YTg2ZWNiMTM3NDU0MTM5NjYwNmE1YjcwMmFmNGY3MDk3YjExOTZhNjcwYzJhYzZiZjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJlYTI3NThmOTc3ZWJhYTQyZjQ3YWZiZTdkODhhODdhZTMzNmEwOWZkOGNlZmRhYTg1NDAzYzY4NzkxYWQzMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3Y2UzM2UyMmUwODk3NjQ2YTQ1YThjOGUxOGUwZTQ0ZTZhY2QzNWUyMTBhYWI4YzI5Y2FhMzBlYzAxYWM0NWYifQ"
+        },
+        {
+          "resource": "repo://src/index.ts#L38-L47",
+          "version": "repo-lines-v1:sha256:53e69b4e127691c5c2b8c79b2066eac4c78e559c015a5b42526c46c49622bde1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3MTA2NWIyODhjMzg4YTkxYmJmMTVjODA0NjliZTIwYjI5YmMzMmMzZmE4NzdkZjI4ZGU5ZWM4YTc2NjRlOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5YzE0YWU0OThmMzBmZTVhZGI4NGQzOTA4OGY1MGQwNjcxZGY4MDA1ZWJkMTNkZjVhNzg3NTljNzdkYjA2MmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjNGRiYjUwZDAxMTAyYmFjNjZhMzA2MjgzMTNjZGE0MGY1NjI4ZTcyMTQwNWNiNzVmYWUzMWYzZTVkNWFjODMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_af84fe1ddd6040d289306bb06d98837d",
+      "statement": "Local development fast paths are npm run sandbox:init (emdash init -d ./sandbox.db --force) followed by npm run sandbox:dev (astro dev on port 4323 with the plugin registered from source), and npm test runs the Vitest suite whose component tests render the real Astro component in a container.",
+      "evidence": [
+        {
+          "resource": "repo://astro.config.mjs#L8-L31",
+          "version": "repo-lines-v1:sha256:e515397e7dcc576a5ac11ddae76873714cfb744d07ba918136a435c311dd9845:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyY2VjYjE0NGE0NmY1ZGNmMTJhNjE2OWZjZWVkNzY5NWU4Mjk0YjA5MGRlNzZmMzY2MWNkZDAyNDkzMDAxNDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3ZTFjN2VhM2M3MDYyNDk5ZTcyMzQ1N2UzZTA2MzAyMmEzM2MwOWEwMDhlZGU3OGRhMmU4NTBhMGIwOWRjMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwZWNjNTAyMDdlZjZhMjYwNzRkZjU0ZjM5NDVmZTE0OGNhNWUzMTI3OTg4NmVmYjU2ODJiMGVlNzRlNWI4NGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNzg4NWQzZDg5OTJjZTM0N2JjOTU4NmM2ZWM3MjVlNjcyNDJiZWVkOGNkMGYyNWZmN2E2ZGVmMGQ2Yzk4ZTYifQ"
+        },
+        {
+          "resource": "repo://package.json#L5-L9",
+          "version": "repo-lines-v1:sha256:1602f46867c1e19c86b1caf2d0e5d35922f3a2a2870c39b9484d0399b138eedc:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDU0YTQ2ZjFhM2RjMWZiMTU3YmQ1YzA3N2JjNjZiZjc1YTc1MDk1MjAzYzM1MTdkMWNkYTAyNjBmZTBhOGYzMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDZlNDhmNGViMTA1OGE4NjE3NDJlMDczMjZkNWFhMTRmNGY0NDRmZDU4MWJjNGM1NTg3NWYzM2QyMDdhODZmMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDczOTRmNDg3ODMwZDRkNDBjMTg0MTI4MjNhYzU1ZmNkNDhkZDVkN2Y3Yjc5NjBkNTIwN2IyMDUwMzI2YjEwNSJ9"
+        },
+        {
+          "resource": "repo://src/__tests__/components.test.ts#L1-L11",
+          "version": "repo-lines-v1:sha256:e7235c62caf73af81b42a6a732e3bf897a866a65de1530b50c0631766322aea7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhMGY0NGFiMDE3NzVhODE2ZTQ0Y2EyZjU4ODQ3NzM5YWFjNTdhOWZkYWIzODIzYTM5YTA3ZjA3YzUyYWMxMzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhNzM0OTJkODk0NmIxZDBmOWQ5YzA0YjcwNGE5MjBmMjRmODllZjdjN2Y3MzExYTg1OTlkMTBjN2Y2MzU4ZDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk2YjgwNDcwN2RlYzlmM2VjZTFlZjgwM2QzM2MwYWMzOGJmM2ZjNzM4Y2Q1MjVlZDY3NDhlYzA1OTBlYzBiYWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_63b2de623da94d1ab3993b505af225da",
+      "statement": "The repository is a native EmDash 1.4+ Portable Text code block plugin that renders static HTML server-side with Shiki on the pure-JavaScript regex engine (no WebAssembly) for Cloudflare Workers compatibility, shipping no framework runtime to the client.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L1-L17",
+          "version": "repo-lines-v1:sha256:067601096cbd16ed048f3caacf84325664b7a697c63bedbeede7928af7659a48:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwODM3MjBlNGFhZThjODExOTNiZWEyNmVkMWYwOTViZmQ1MmUzM2Y0YzNlN2FlODZjZGE3ZGRlNmU2MDRjOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4MzM3NDRlOWQ0YjFiZGJkZDRkNDI5M2RlN2Q1Mjk1MWQ1NWY2OGM5MjAzZjM5ZTlmMTQwZTRhNTY5NDJmN2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljNmE2MWMwMTE3M2I4ZjRkNzkzM2Y5NWY3YTMzMTAxNDc4Njk3MWUzZmQ4N2UwNjZlNDZjODUwOWFlMDg0NWQifQ"
+        },
+        {
+          "resource": "repo://src/utils/highlighter.ts#L1-L8",
+          "version": "repo-lines-v1:sha256:526c3d2c503f13a6e494ae494e99cc80f23db9b4f319a4ded8d762bd4e5c6114:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODNlZTVjNWIwZjE0Y2M5YWM5Njk5NTFlMzRjZDJiNzYwODFjMmQ3OTM5YWIwOGJhNmNkODI2NmY4ODU0ZTJkZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDgyODFmMmNmM2VkYjI2MTRiNTY1ZTdiM2ZkMzA4MDVlMTFlNGUzZTg3OTdhMjIzMmVkYmU3ZDdjMDVlMDU1YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODZmMWJkNTc5ZjFhMWIwZjNkMTk4OGZiNzNmMGZhNTlhOTQzYjZkYzU4NGU4NjFjZTY5ODEzMmNlMjhhN2RmNyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}

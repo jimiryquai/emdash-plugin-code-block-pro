@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/block-schema.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:de6523d623b6f184b3ddfa0b629ca04298445988cbf93a313cf4494c80eedb24",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/architecture/overview.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:5a7e0621e07c96ff173b11bc309106802d783498e97c8cfa203a96455f9f8f8e",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/operations/dev-sandbox.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:aa1d077c0e228007c40c9b0b974a865ed38581809983ddcbb73259ff95da5cb5",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/operations/packaging-and-release.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:2b0a653b69d52181681a730044b5c5eaed189fd2bb5bec5ae7b2d1d35fb43f5a",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/quickstart.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:dcdc7f5a69351a6e610035111bc9bfd057b1fdeaabe0c5c1d44f30c6e024ab6e",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/rendering/code-block-pipeline.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:c20b701081cbc1719349606d0817679a3496e0a27e01b49946b955e4f04f0ade",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/rendering/line-annotations.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:6e3cb80741d6601e49e47a61f401728e69f109a0a3233e85719a5552bfc9f1f8",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/rendering/shiki-highlighting.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:8d04be2c568f64e518c5c24d7b2929b08acad737e3f83495e6df978319b2345b",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    },
+    "/openwiki/testing.md": {
+      "gitHead": "c58ec42d8734f095ac8f12359d9f9e01fd9c49dd",
+      "sourceFingerprint": "sha256:d0410f1ab4ca61db28b6eaf28f80f70e9e330b810620fb369df3ca33449caf99",
+      "pageVersion": "sha256:b8ef3c491b4db5b590046c1bd2d7328165788ae40fdbb1af4ef23e702e880303",
+      "completedBy": "claude-code",
+      "completedRunId": "c1b05345-0f93-4e6a-a5e0-e7cb05a8ff4b"
+    }
+  }
+}

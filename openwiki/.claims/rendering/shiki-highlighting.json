@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:8d04be2c568f64e518c5c24d7b2929b08acad737e3f83495e6df978319b2345b",
+  "claims": [
+    {
+      "id": "claim_c6a2ec8c7d524c30bf41d7c5f152b572",
+      "statement": "The highlighter runs Shiki on createJavaScriptRegexEngine from @shikijs/engine-javascript because Shiki's default Oniguruma engine requires WebAssembly.instantiate, which is disallowed in Cloudflare Workers (workerd); shiki and the engine are peer dependencies (^4.0.0) so the host site controls their versions.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L16-L22",
+          "version": "repo-lines-v1:sha256:6a27781edf094fe29cb82c3c453cc599cdab398fe43e68a98b893b89ab841529:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTY0MWY3NmI1NzQ4YmYxZjA4ZTAyNDY3ZTllMmQ4ZmFhOTYxY2RkYTk3N2NjMThjZDNmMWU4Nzg0ZmQxZDcxYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2MzZTJhZTU5ZTcyOTBlMzdkZDUxYzc2YjRhYTk3MWJmM2IyYTVhYzdiYjFlYjYwYmNiMDdmNmE5MzQ0ZmNmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTU2MjQxYjcwYTcwNWJhYTIyMWZiMGYyMjFhMzMyMzVhYTM2NDQxODUxNjMzZTcyZDBmMTc1MzdlNjU1Y2M0NSJ9"
+        },
+        {
+          "resource": "repo://src/utils/highlighter.ts#L1-L8",
+          "version": "repo-lines-v1:sha256:526c3d2c503f13a6e494ae494e99cc80f23db9b4f319a4ded8d762bd4e5c6114:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODNlZTVjNWIwZjE0Y2M5YWM5Njk5NTFlMzRjZDJiNzYwODFjMmQ3OTM5YWIwOGJhNmNkODI2NmY4ODU0ZTJkZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDgyODFmMmNmM2VkYjI2MTRiNTY1ZTdiM2ZkMzA4MDVlMTFlNGUzZTg3OTdhMjIzMmVkYmU3ZDdjMDVlMDU1YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODZmMWJkNTc5ZjFhMWIwZjNkMTk4OGZiNzNmMGZhNTlhOTQzYjZkYzU4NGU4NjFjZTY5ODEzMmNlMjhhN2RmNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3bc470acb3db4640b14e84fa163b517e",
+      "statement": "getHighlighter caches a single Promise<Highlighter> in a module-level variable, created with github-dark as the baseline theme, all LANGUAGE_VALUES preloaded, and the JavaScript regex engine; caching the promise means concurrent first renders share one initialization.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/highlighter.ts#L43-L58",
+          "version": "repo-lines-v1:sha256:e020c46eccbd70c92915228232dea11134346aad18c523b9a890566c2de8e683:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmMTM3NTcwZGQ5N2QxNmI3ZmVmY2EyYzMxMDJjZWRiOTc0YzZlNDBkYzBmNzFmMjk2NWJkYWRkOTMyYmFkYWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzZjI1NzhlMWQxOTg1MGI0YzM1Y2QwMjMzZWE3NmExOWQ0YzE0N2E5OWYwMDNhYmRlYjljMTVhNDUxYzc3ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRlMjhjYzA5NGY2N2VlODg5NDYyYWY2Yjk5NzY2YjE2MmVkMTFhZTRjMDY3YTE2MDJjMzFiYTE0MzIxM2Q0MDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2fa1342839334904abf3ad379a5a9d60",
+      "statement": "highlightCode walks a fallback ladder: an unloaded non-text language is loaded on demand and silently degrades to text if unavailable; an unloaded theme resolves through THEME_MAP (a static record of dynamic import thunks whose keys match the 24 THEMES values so Vite can bundle each theme as a chunk), falling back to loadTheme by name, and on failure logs an error and uses github-dark; final rendering calls codeToHtml with text and github-dark as last-resort defaults.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/highlighter.ts#L12-L41",
+          "version": "repo-lines-v1:sha256:64e40388d437e7ef8361f88056b4d83fae12db21325b97f0656bbb151f3e79fd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyMGJkNGVhN2UyNTdmMTVlMjk5MTMxNDdjYzcwZWU1YTcxZmE3YWRjMGI5Nzc5MmFhN2YzNjdhNThiNTdmYWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyM2NiNGMxM2Q2Nzc1OWQ1NGY3NjcxZDQ0MDM0OTcyZDA5MDNhMzlkMDhhZmFlNzNiYjk4MWViOWFiMGRjZjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2ZjFiZDU3OWYxYTFiMGYzZDE5ODhmYjczZjBmYTU5YTk0M2I2ZGM1ODRlODYxY2U2OTgxMzJjZTI4YTdkZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0MzUzNmYyNTYzYzVkY2UyYWNkMzAwYjlhN2ZhZTU4NzQzYTQxYmY3MDI1YjRkZjk3ZjA2ZTExMjEzMWJkZWMifQ"
+        },
+        {
+          "resource": "repo://src/utils/highlighter.ts#L61-L99",
+          "version": "repo-lines-v1:sha256:bdf656ae853a1d57d4ca59bf98eba5886515ebc30217fb83892f501feba3c7bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyMTUwODE3MGE2Zjc1NjIyODFjZjQwYmExMmNmOGQ1MjNmMzFlMGYzN2EwZDU4ZmZhMzRmNTBiMjM4MDA0NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiMjJhNmI5M2ZjMjE2ODQ3MDBmNmE3NGJiMmI0OTI1MDcwMzE1YjJlZWRiYjlhYzg2NWI2ODE3YjE2ODMwYjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1e650d6cac194605a6aa02dc7ed82685",
+      "statement": "Preloading all catalog languages upfront is a deliberate tradeoff: every catalog language initializes on first use for faster steady-state renders, at the cost of a heavier cold start, and tests pin the catalog invariants (24 themes, at least 10 languages) to catch drift.",
+      "evidence": [
+        {
+          "resource": "repo://src/__tests__/admin.test.tsx#L40-L46",
+          "version": "repo-lines-v1:sha256:2c18555d5b0211516f5084c1686044bc41be3801552afa3ff249946addf13352:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzJkYWRhMTllOWFlMjcxY2IyNTVhNDE3MWM4ZmZlZjk1ZTU2OTdhYzU2NWE3NjM4ZDAxODlmZDI4MjIzMzI0MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGE3MzQ5MmQ4OTQ2YjFkMGY5ZDljMDRiNzA0YTkyMGYyNGY4OWVmN2M3ZjczMTFhODU5OWQxMGM3ZjYzNThkMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjRkNzg2ZjNmZTRjMDQxMTAxM2NlNjdiYWY1Y2QwOTFkZjEzYmFlMmMxNjc2ZTkzOTZlODM4NDhhZjBmOTE3YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTg2MzRhNGZlNTg2YzJhNjc0NzE0YTExZmQ5ZGU0ZDE2MzcwNjhmMzgwNjQzNDg0MTYyODA2NmEwZDI2YjZmNCJ9"
+        },
+        {
+          "resource": "repo://src/utils/highlighter.ts#L46-L58",
+          "version": "repo-lines-v1:sha256:d531ab5bea35b01db826bd9457165a7246274e0e493dc9e79e40a567416e84ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzMDhhZWVjNjllMWJjODZlOTk4YjVkOWU4NzIyM2UyNWY0MTQxNDVmYjY4ZTAwMmY1YmMwY2Q3MDFlODQ2NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiNzliYWI5OTAwZTc0YWNhNjIxMmY1YTY4OWNjODhlYTdiZGVjMjcxZjJhOWI4N2UzOWQyNjk2YmIwZDM0MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRlMjhjYzA5NGY2N2VlODg5NDYyYWY2Yjk5NzY2YjE2MmVkMTFhZTRjMDY3YTE2MDJjMzFiYTE0MzIxM2Q0MDQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}

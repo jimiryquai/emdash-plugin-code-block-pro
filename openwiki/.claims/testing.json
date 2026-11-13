@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b8ef3c491b4db5b590046c1bd2d7328165788ae40fdbb1af4ef23e702e880303",
+  "claims": [
+    {
+      "id": "claim_4370c7dcb683422f82cf413acd1e6bf9",
+      "statement": "The Vitest harness uses getViteConfig from astro/config so .astro imports compile in tests, with a mock-virtual-emdash Vite plugin that resolves virtual:emdash/* ids to virtual modules returning a minimal i18n config for /config and null for /seed and /dialect; tests are included from src/**/*.test.{ts,tsx} with a 30 second timeout and globals enabled.",
+      "evidence": [
+        {
+          "resource": "repo://vitest.config.ts#L1-L31",
+          "version": "repo-lines-v1:sha256:caf4623cf183cc4d2e067d6a012a69e2ebdd6faafdda1ca6b47202bde0e507f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkYmE1NjlkMTFlMGYyZTQwMzBkOTFhMDllYjMyZmUzNTliOTZkNGIwNjU1ZmI1Zjc0YTM1NGIxYWRjM2ExNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d1fefa4e1dce487cae697376b31c1767",
+      "statement": "components.test.ts renders the real CodeBlockPro.astro through experimental_AstroContainer and asserts actual HTML: Shiki classes and colored spans, the plain-text foreground fix (--cbp-theme-fg #e1e4e8), exactly two cbp-highlighted occurrences for a 2-3 spec, header and copy-button visibility, cbp-has-line-numbers toggling, custom themes, the .cbp-wrapper, empty code handling, trailing-newline stripping in data-code, and counter-reset:cbp-line 9 for startingLineNumber 10.",
+      "evidence": [
+        {
+          "resource": "repo://src/__tests__/components.test.ts#L1-L213",
+          "version": "repo-lines-v1:sha256:5905b78dc9358d9530ef0a199138113a77b616b5581c45567e733864273f03b6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzYTBmNDRhYjAxNzc1YTgxNmU0NGNhMmY1ODg0NzczOWFhYzU3YTlmZGFiMzgyM2EzOWEwN2YwN2M1MmFjMTM4IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmNmY1YjQwYjE1ODQ1N2QxNzg2NGYyMTc5MDc4NmRkNWEyZWNkYjY0YjY2YTY1MWY3ODhkNGUyNWNkMzMwM2QyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_aade428a851d4ace96791e24d7221a98",
+      "statement": "descriptor.test.ts pins the plugin contract: portableTextBlocks present, native format with version 0.2.0 and entrypoint and componentsEntry values, createPlugin runtime admin blocks deep-equal to the descriptor, options threading with instance isolation (defaultTheme nord applies to that instance descriptor and runtime while a fresh instance defaults to github-dark), and exactly nine fields with their editor types.",
+      "evidence": [
+        {
+          "resource": "repo://src/__tests__/descriptor.test.ts#L1-L116",
+          "version": "repo-lines-v1:sha256:cdf90081b2392ef3b589b869cbe555f8bf76918f0b003b208c79623b2bb93f8f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI0ODZjMzhmZDk1ZWYwNzA5NmU3OTc2OGFkYmU3MjFmODJjOTExOWE0MTI5Y2JlM2IzYzEzNzBmMTZmMTU4N2RlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmNmY1YjQwYjE1ODQ1N2QxNzg2NGYyMTc5MDc4NmRkNWEyZWNkYjY0YjY2YTY1MWY3ODhkNGUyNWNkMzMwM2QyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_2f1fd61648d34e31a9770a4145a5a778",
+      "statement": "parseLineHighlights.test.ts covers the full parser grammar edge cases: empty and whitespace input, singles, lists, ranges, mixed specs, whitespace tolerance, single-element ranges, reversed ranges, non-numeric and malformed parts, deduplication, overlapping ranges, a 1-100 range, and nullish input.",
+      "evidence": [
+        {
+          "resource": "repo://src/__tests__/parseLineHighlights.test.ts#L1-L83",
+          "version": "repo-lines-v1:sha256:70431bc27baade0aad237ad0a68a8abdd32de1acf8b62652d0dbd5634a05d527:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NmMzOGZkOTVlZjA3MDk2ZTc5NzY4YWRiZTcyMWY4MmM5MTE5YTQxMjljYmUzYjNjMTM3MGYxNmYxNTg3ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b53af12dcac24c2c81205e4beeec5c12",
+      "statement": "The remaining suites are smoke checks: admin.test.tsx validates CodeBlockProData shape flexibility and catalog invariants (at least 10 languages, exactly 24 themes with valid defaults and mirrored value lists), exports.test.ts checks blockComponents is a single-key map to a defined component, and dependency.test.ts dynamically imports emdash/runtime asserting emdashLoader and getDb are exported functions.",
+      "evidence": [
+        {
+          "resource": "repo://src/__tests__/admin.test.tsx#L1-L88",
+          "version": "repo-lines-v1:sha256:27f5110f640fc51edcf89f86c5ffe5823cef929d3d62a13ac9fd96ad74a7a1c8:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NmMzOGZkOTVlZjA3MDk2ZTc5NzY4YWRiZTcyMWY4MmM5MTE5YTQxMjljYmUzYjNjMTM3MGYxNmYxNTg3ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/__tests__/dependency.test.ts#L1-L15",
+          "version": "repo-lines-v1:sha256:154acaab8952d9a43dfabf95984ea3c7d86cb5caeb46afb09d675e02c30a35ec:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NmMzOGZkOTVlZjA3MDk2ZTc5NzY4YWRiZTcyMWY4MmM5MTE5YTQxMjljYmUzYjNjMTM3MGYxNmYxNTg3ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/__tests__/exports.test.ts#L1-L17",
+          "version": "repo-lines-v1:sha256:fb36528a58b4b4acd1d0136e4f1db0a198bc9827d3aff709c74de916171d1b59:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NmMzOGZkOTVlZjA3MDk2ZTc5NzY4YWRiZTcyMWY4MmM5MTE5YTQxMjljYmUzYjNjMTM3MGYxNmYxNTg3ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}

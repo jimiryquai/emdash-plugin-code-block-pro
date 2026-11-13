@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:6e3cb80741d6601e49e47a61f401728e69f109a0a3233e85719a5552bfc9f1f8",
+  "claims": [
+    {
+      "id": "claim_e4ecdc16b4864d9a95061a73e7f0fc82",
+      "statement": "parseLineHighlights parses the lineHighlights spec into a 1-indexed Set of line numbers: comma-separated singles and inclusive start-end ranges, whitespace-tolerant, deduplicated through the Set, and it never throws — empty or nullish input, non-numeric parts, malformed ranges like a-b, and reversed ranges where end is less than start are all silently dropped.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/parseLineHighlights.ts#L1-L23",
+          "version": "repo-lines-v1:sha256:64b0796d1fbcafac4f18d4c8151c27a55807410888c80e359ecea7bb7af97d91:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d945001abf34959abc18e285b72af82",
+      "statement": "Highlight indices apply to physical output lines: the component counts span.line occurrences in the Shiki output and adds cbp-highlighted to matches, after the single trailing newline has already been stripped from the code.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L44-L46",
+          "version": "repo-lines-v1:sha256:f2b23744187b9ca4b28d2911486115dc0079bbaca20699f0d07f4a42b61a9c86:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmUxM2U1ZjY4OTc2YjExNTg4ZDQwYjE3YmQ1ODM1MGY4MGY2NzgyOTZmZjc3ZTgwYzVmNzBlMjhhMGU3MDY0MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTQxODJkNDRiMWZkM2Q3MmQ0MTI3N2NhNTk1ZWE2N2YwYWNhYmUzNmJkOTY0NGNlOGIwZmVlOTVkNGU5ZjcwNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmUzZGRlNjE5ZDg3NmE2ZGYyZmMzNjllZDU4OGZjMWNkOTg0MjBjOTdjMWNhNTc1ZjQzYjM1OWE4NDdlZDI4OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDI4MDg2OGFhOTNjMTM3MTFiYmIyOTdjZDk4NjNlYzE4NjE5MWRkMWU5ZmY0ODMyZWMzNGJlNDExOGQ4ZmExZCJ9"
+        },
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L77-L89",
+          "version": "repo-lines-v1:sha256:ef1a0b7f5964a65146a368534de9768078addd0dfc3c1c62b090d6a710e049df:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1MTg1MGZkMjQ0Y2FlMzVlOGRjYTNjMjUyYmFkMzMwNzJmNDc1ZDljNDFhZTc4YzQzZTM4MTdhYjgyMmZkZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiOTM1ZWRhZmViZGU5ZjQ3ZmM0NDk0ZTRiMTk0YTAwOTRiNDAxM2RkMDdkYmMwMzc1MjQ0ZWE0ZGViZTkwZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhMzE2Yzg2OThiZTRjNGZmODg0YzJlZDc1ZjQyYWY3ZjEzNzc4OWMwYTUxYjFkMTkyMWQyOGUwNzg5NWY0NDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a18a46844bb8471abb90a628fa9dd67a",
+      "statement": "Line numbers render through CSS counters, not injected text: counter-reset cbp-line on the code element, counter-increment per .line, and a ::before gutter cell showing counter(cbp-line) with user-select none, -webkit-user-select none, pointer-events none, and speak never so the gutter is decorative and unselectable.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L417-L441",
+          "version": "repo-lines-v1:sha256:ac84a5614ea50f17c67f47fa3a22a25f8f8e3cb4634b3347cfe560b73990ec95:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkMWNhYjgzZDE2OTE4MDNlMjEwNDAxMGUwNDNiZmU4MmRjYThmZmExNDE5NWNmMDRjNjliN2RhYWEyZDMyMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3Y2RhODJkYTYwNjIzOGUwNWU2MjM5OTU2OWM1ZWUwMzk5MzQxOTY0OGFlNWQ0M2EyYmY4Y2Q2MzQ3ZjgyNjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjYzA3Njg1YWU3NTM0ZjA5YWJiZWExMjc5OGMwZjEzYjNmNmI0ZmZmYjQ0NzI5MDUyNWM5OGY3ODFmYjZjNTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0Yjk4MTQzMWMwYWI3MTllYzUwZTZhZWY0NzY3OTUwYzIyZTNmZjU5ZDE5MWQ5MzY1MmM5NzQ0Nzk2ZjIyYTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_013dcf7864b248668ee5ae76553eab1a",
+      "statement": "A custom starting line number is implemented by injecting counter-reset:cbp-line startNumber-1 into the code tag inline style when lineNumbers is enabled and startNumber is not 1, so the first rendered line displays startNumber; startNumber parses startingLineNumber with parseInt and falls back to 1 on malformed input.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L91-L104",
+          "version": "repo-lines-v1:sha256:7a2f3d7bdae73fb9d75136fa1c73aca83b423939e5ef118baa63e3bf702ab938:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxNDUxYmM5ZDk1MmEyZmFhOTAzMTVmZGYyYWZkZjU0YWJjY2QzNDYwODc2ZWM3ZjFlZTExMWFkODM2Mzg0ODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmNDE3MmIyODhjZWExMWEzOWIxZDJlMTcyOTc0NDRhNTQ0MDBlOTRkYmIzYmFlODQxMDI2ZWRiYTc0MTJiNTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA4M2JkZDBlNTM0NWEzNGNiMGQxNmJhMjJkZGViYzJkNjRkMzNhZjIzMzJhOTVhYjM0NzIwNmUyZGIxMjcyZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5e80042e267345619acf49cec0efa357",
+      "statement": "Highlighted lines get a soft indigo backdrop rgba(99,102,241,0.08) with a 4px solid left accent bar drawn as an inset box-shadow in #6366f1, and line hover adds a faint background glow with a gutter opacity transition.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L391-L398",
+          "version": "repo-lines-v1:sha256:f3f961597e0e01a44e22c6677b26829e6c55fc4b148df0dda994690b5d46c339:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTE1ZTNmMzU3MDRiZDkwN2I4OWI1NjFmZWNhNjBlNjUyNzg3ZDViOTJiY2RiMjUzMDQ3YjEyMWI3MzRmZmYwZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWVlMzEzNGVhMmJiMWVlN2ZkZTVmZTZiZWNhOTlhZjk0MGU4M2FlNThlNWM1OTMyMjk0M2JmNTM0YjFiOGVkMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmQ5OGEyMzM0ZTAyZGQyNzRjZDI0ODA0ZjRhNmViNjMyY2JiMDVhY2MwN2Q5ODYzMzFlN2VhNTZhMTIzNjg0OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmVhOWIwZTRhZDY0NzE2NjE0MzhhMTIxZjUzOTY0ZmYzOTNjZDhkMWRkMzlhY2UwMGRlYmM1NTcxMjgyNzIyNiJ9"
+        },
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L444-L447",
+          "version": "repo-lines-v1:sha256:d7c11387ad51608c4e68dbdb443ef6d7bfbf9c86813f2e0652bba459e3edf596:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzY3ZTE3YWU0Y2YzZTcxODE5MzJlYjViMmI3MzI1NWUxZmY4YTRlY2NjZmZlNjI4NjZmZThlOTY0OTEyNDcxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjdjZGE4MmRhNjA2MjM4ZTA1ZTYyMzk5NTY5YzVlZTAzOTkzNDE5NjQ4YWU1ZDQzYTJiZjhjZDYzNDdmODI2MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjkyZDJkN2M3NjlmYmZiNTIwMWIxYjRiZWFiYjQ2YmM3MTVkZDYxNGY0NzdlYjNjZGJhNDljMzk2ZWRlMzk0YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzFjODQ3NjI2M2FlZjM5MDg1ZjhkYmUwMzU1Mzc4YjIwYTkxY2IyNmQ0ZTE0ZTI0OGNmNzkzNWYzMTAwZmUxOSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}

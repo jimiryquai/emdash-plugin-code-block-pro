@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:c20b701081cbc1719349606d0817679a3496e0a27e01b49946b955e4f04f0ade",
+  "claims": [
+    {
+      "id": "claim_767aa27e110b4dccbbf2df1ee4ef9255",
+      "statement": "CodeBlockPro.astro normalizes input before highlighting: it destructures the Portable Text node with defaults (code empty string, language text, theme DEFAULT_THEME, copyButton true), parses the lineHighlights spec, strips one trailing newline from code to avoid an empty last Shiki line, and substitutes a single space for empty code so Shiki still emits a well-formed pre/code skeleton.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L29-L47",
+          "version": "repo-lines-v1:sha256:fd994e642a98731831684ae579209e4563c28a48aa12c973ade30cd4150ced85:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMjY4ZGVjOGY4MzhkNzVjZTFmYmEyOTY3NzI2NWZlMWMyOTg2YmY3YzRlMTllZmM1NjU5MjYzYjFkYjMxMDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhOWJlYzE2ZDM2MzI5NGRlMWVkNGQxY2M5OGJlNzZiYjhmZWQ1ZDI3YmNjNzk4NzFiMWFhMWRmMWY3YWEwYjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5NWVlYjNjYWJhODQ5YmIyMWE2YzljODY2NjJiYWQzZDI5NzYzNGYyYzIyZGI3MGU5YjBkOTA1MWU2ZTNlNDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_42ac1a33e3e041ad99b969cfb1783738",
+      "statement": "Highlighting runs inside a try/catch; on Shiki failure the component logs an error and falls back to a hand-built plain pre.shiki with the default colors (#24292e background, #e1e4e8 foreground) containing HTML-escaped code, so the block still renders readable output.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L48-L56",
+          "version": "repo-lines-v1:sha256:25f25a73c4d6b18ecd2df42c99d5f59105b0ebdd5605a88702e33d6ccc00189a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWFhNzFmMzc4NzdhOTg4NmQ0MGEzYTk5ZDA0NzdiODQ5NzBlNjU4NDIxOTkwNjBlZTNmZTZiZmVjNzQ1MWNiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTdiNTkxZDkxM2FlMTk2ZjQxNDkyODNlYjczZmJmNWE0OGM4ZThhOTI5ZjY0ZGRlNjcyODU1ZjEwYmNhNjY4MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDk2ZmZlNjlhNDVkZTExMmE0MjJiMzI1NTFmYzdhNzhjMGJkM2NlZTg5NzZkZTVmOWIxNzlkZWJiZmIyYTM1NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cc7bee6583f4ed59f12f35dc0feb1b2",
+      "statement": "The pipeline post-processes Shiki HTML with three regex passes: background-color and (negative-lookbehind) color are extracted into the wrapper CSS variables --cbp-theme-bg and --cbp-theme-fg; the pre tag inline style is stripped to avoid !important hacks; and annotation classes or counter resets are injected — cbp-highlighted on counted line spans, and counter-reset:cbp-line startNumber-1 on the code tag when line numbers are on and startNumber is not 1 (parseInt fallback 1).",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L58-L104",
+          "version": "repo-lines-v1:sha256:4fba4e72f5983a4b040102670178ad919f3d6f2219bc0f827db020033a884ec8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzYjkwYzUyZWZkNGQ1NjE2ZjkyMTM5ZmI0YTA5ZDdhNzYyMDFjNTNlMmNlMjFmODA2YWJhZGVjNTk2ODNlMjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEyOGFkMjRmZWQ0MTYyZDFiMzNmMWMzNTk2YzgyNzYwNjMyYTU4MTQzOWRmYWJjODk0Y2RiOThmNjMxZDY4MzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA4M2JkZDBlNTM0NWEzNGNiMGQxNmJhMjJkZGViYzJkNjRkMzNhZjIzMzJhOTVhYjM0NzIwNmUyZGIxMjcyZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b43fc9a5b89947c496cb23b983a2be51",
+      "statement": "Header markup appears only when there is a filename, a non-text language badge, or a copy button; lineNumbers and copyButton tolerate string booleans (true or the string true, rejecting false or the string false); maxHeight is applied as max-height on the .cbp-scroll container; and the copy button stores the trimmed unhighlighted code in its data-code attribute.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L105-L166",
+          "version": "repo-lines-v1:sha256:57f0a156eb57e1731d74f04e9f584b4ebb3deadc7efa50ba9a27bd65b4896429:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwYTJiYzJmYTk2NGYxM2QxZjc5NTc3NDYxZDczNDFmM2FjNDdhMTRlNmVjZDY5YmFjOTQzYWU2Y2FjZDBhOTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3NTU4ZGU1YTQwYzk1NTY4MmZmMDM5MjNlMTc2MjIzZWNhYzdkZjIwMzBiMjkzYTc3ZmMzNGMyOWI0ZDMwZjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1YmIxYWY1MjFiZWNkNTVkNzA1NmE4YTlhMGRkMWViY2RhMWZjNzlmZjIzZjc0NTc3NmY0OTk1ODMzNTI5MjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkNDYwZTVmZDkwMjdlYTZkOWM1MjgxZDRmMzBkMzcyNGUzYzhmZWI1NDNlZjhlYjJlNjAwODljNGQwYmFjMDQifQ"
+        },
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L205-L209",
+          "version": "repo-lines-v1:sha256:0ce2754abc3fd0809221eeede014e762c77816d38314ff585b6c1339ecce837d:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjhhMTczMjhiOGZjZjM2NTNlNTAzNWJiYWU3OTdhOTg0MzExMDhmMTQwYTdlNGM0MzE3MjdhZDFmNjUyZjg2MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGVhNTQ0YWQxYWRiZmY2ZGQ2ZjQ1MDQ5MjA1OTZiMGU3MjlkZGUzODA1YzBhMTFkZGQ3NmI5ZDdkM2E4ZDgzYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTdhNThkOGViYWRjNDlmNmE3ZWQ2OGZmNWU5Y2ZmNWE1MjcwYTU5ZWQ5MjY5YjRhOWRhNjU2MzAwZThkYTRkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDU5ZjI2NmJlMmFkZGM4MTRlODI1ZTk5Y2NiMGMzMzE2MTE4Njc0NzdkNDBiZjFmY2I5YTFlYzI4NTc1MzJmMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d0b846b5b90849f981a1e5ec00d13013",
+      "statement": "isThemeDark adapts UI chrome to the theme: hex (3/6-digit) and rgb() colors are classified by the WCAG luminance weights 299/587/114 with a <128 dark threshold, unparseable values default to dark, and the named colors white, lightyellow, ivory, and snow are special-cased light; the result selects the cbp-theme-dark or cbp-theme-light CSS variable palette on the wrapper.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L116-L152",
+          "version": "repo-lines-v1:sha256:e85db574904dee254ffc6f27e1f00aac6fe490cb279506829b4cc6aee95073b6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1NzQ5YzA3NTZjZDU4MGVlZDUyYTI4ZWVhMjZkZjhmMmRjOGY4ODRkNDhjMjcyM2U3OTI1YWNkN2I3ODVkZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZWRmNjE5NGIzNGFmNTI0ZDVmYTZhNzE5NmY4NDZkYjI0NjM3ZGFjNDZlZTVlZGQ1MjQyNDk2MzlkNzIxNjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdkMzgwMzU1MzA1NTQwZDU3NjhkYWM0ZmNjMTE0NzllMGE4ZjBlYTA0MTkzYjQ2OWVjM2YyMGVkY2I0Y2U1NWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRiYjVjYmQ5MjgxMTQ5N2YwOTI5OThhZDA5YTYxMjRiOWQ1NDI0Y2M1MjZhMDliOWRhOTczZjgwYjM0NmY4MDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf1b613e787146129a34d10f6976473f",
+      "statement": "The stylesheet is declared is:global because Shiki HTML injected via set:html bypasses Astro scoping, with all selectors .cbp- prefixed; the only client script is a single delegated document click listener on .cbp-copy-btn that decodes HTML entities from data-code, writes it via navigator.clipboard.writeText, and toggles the cbp-copied class for 2 seconds.",
+      "evidence": [
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L214-L216",
+          "version": "repo-lines-v1:sha256:825d7454a5a52aea4d2e1dd08e785268cf54f7fce0ccd61ee728d8eb966e5198:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmEyYjQ2NjcwZWYwZDk4ZjExMGZjZjNkNDIzYWY4YjNmZjUyOGJmZGE3YTlkNDVlOWZmOTAyMzUzZWExOTZkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzA0ZjE1OWQ0NTIxNjE3MjNmYWVkZDZhM2QwYjIxMDQ1MDNkNTJkNWI3YWFkM2YzMWVhODRhMmM1NWRmYjUzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWY2MGMwZTVhYzBlNWY4MGRhZDMyZDQ3YmM2YzhhYjk0ZmQ0ZjI4YjFiZmVjZTY3ODczNjM0MzZiNzYzZDFlYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTg2MTk2NDE0OTI0NDkxODkxMjAyZjI4YTJmZWZjYzgxYzc3Yzc4YmUxZTc3MDgzMGI1MWE0OTAyZDU4MDM4MyJ9"
+        },
+        {
+          "resource": "repo://src/astro/CodeBlockPro.astro#L495-L515",
+          "version": "repo-lines-v1:sha256:ab68f145c34ef09a89e141ee7fef5e434baa3fd95d2d360e8ca317532c720cf2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmMTRhMzIxMjBjMDM0ZWFmYzc2ZDQxMzgxNjZiZWI4YzdhOTY4YTM2MzNhMDAwOGU3NGY0MDZkZDlkMjEyNmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmMzU4ZjAzNzFhNmU3MzJjNDM0MDMzMjIzNTE5OWRjZDkxZWJjNDYyMzlhNWRkY2ZlNmY5YTYzZTZlYmVjZmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhZGZkN2M5ZTMwMmVlYTlmN2JlNzMzMTc5MzY4YjYzZGZmZjI1YzY0NTJmY2I5MWY4NTU1MGVkOWZhN2M0NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}

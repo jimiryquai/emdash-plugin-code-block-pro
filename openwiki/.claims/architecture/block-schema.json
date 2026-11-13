@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:de6523d623b6f184b3ddfa0b629ca04298445988cbf93a313cf4494c80eedb24",
+  "claims": [
+    {
+      "id": "claim_52e4d365262547008897c9d537ad8b74",
+      "statement": "The plugin registers exactly one Portable Text block type, code-block-pro, whose editor form is built by createBlockType with nine fields: code (multiline text_input), language (select, initial javascript), theme (select, initial options.defaultTheme or github-dark), filename (text_input), lineNumbers (toggle, initial false), startingLineNumber (text_input), lineHighlights (text_input), copyButton (toggle, initial true), and maxHeight (text_input).",
+      "evidence": [
+        {
+          "resource": "repo://src/index.ts#L11-L28",
+          "version": "repo-lines-v1:sha256:0454049b4056fb2876ec08d3f6f3aefd62b39ca4a70dcf7a8625baf038f1828c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3ZDE5MmZiZjFiZDAwYzQwYzNlNDk5ZDhlODQ2MmFkOTZhYzhjZGExZjYwNjE4ZTAwNjA3NGFjOTYwNmNmNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0MmNiYzI5MWY2M2JmOTY4MDdhNWU2MDY5ZDFmOTY4YTUzMzMxNzZhODhlMDRjNDkxMjJiMTI2NzAyNDllMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVhZjk5NWNhOTAyYmNhYmIxNTcyM2VmYzNkYzRkMTg0YzAzNDk0ODYzZTE5YmRlZDI0NjE0ODlkZWZjNTIzNGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_842f370d6e694ed08ef27ba52d030d6b",
+      "statement": "The only plugin option is defaultTheme, which flows solely into the theme field's initial_value as options.defaultTheme || DEFAULT_THEME, so each plugin instance keeps an independent theme default even when EmDash creates the native runtime.",
+      "evidence": [
+        {
+          "resource": "repo://src/index.ts#L20-L20",
+          "version": "repo-lines-v1:sha256:86d560dc81dc08947654ee794c82c0aeb85bfec44df584af9a91224a0903dbeb:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODZkNTYwZGM4MWRjMDg5NDc2NTRlZTc5NGM4MmMwYWViODViZmVjNDRkZjU4NGFmOWE5MTIyNGEwOTAzZGJlYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODZkNTYwZGM4MWRjMDg5NDc2NTRlZTc5NGM4MmMwYWViODViZmVjNDRkZjU4NGFmOWE5MTIyNGEwOTAzZGJlYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTliOTI3YWQwZWRmMjM5ZmFkODk3NmU0YzVkNGI1ZDcyN2JiMjNjNTBkYWJjZGIwOTVhZjU4ZjVjNjk5YzY4OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2EzN2JkMzlhMTMxYzVkMjRlNmM2ODYzOTEwZWRhMjBhYjJkYzE5YThiZjU4MDU2OTFmMmI1MzAxNTUzNTUzOCJ9"
+        },
+        {
+          "resource": "repo://src/index.ts#L6-L8",
+          "version": "repo-lines-v1:sha256:49cbdab303fd0ed2dbce966ae02ae91600fa82e4b5b823bb7b5e03b4730560e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2E3NDQ1YmM0ZjM2MmVjZTc2MWZhMzNlYmVkMTYyMWE3MmE4ZDM3YjJlYmNjYTFkMWE0ZWZkMDAxOWE4N2E5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTkzMmM1NGEyM2U5OTg0NjA2NWQwNjM4NWY0MzUzZjFjMDUxZGUxZjFmMTg1NWMwNTJiZjRkYzc3NzVhMjNmYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjMwYWZhNzAxMmNiNTRlYjE0ZjNlZDZiNzA0OGEyNGE3NjkyMGE2NTdkZmE1Y2U3NmJiYzI2MGIxM2I0YmZiYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b0a0439468bf4105a2d4b4700311d5ff",
+      "statement": "Both the build-time descriptor (codeBlockProPlugin) and the native runtime (createPlugin) build their portableTextBlocks by calling the same createBlockType(options), so the descriptor and runtime admin always see an identical field set; EmDash 1.4 declares portableTextBlocks and this plugin always supplies it.",
+      "evidence": [
+        {
+          "resource": "repo://src/index.ts#L31-L44",
+          "version": "repo-lines-v1:sha256:bcdf63f181643f436699edfb17ee967b17a530198e6f8d5a0ed5ebc5863bf2ef:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWE4NGYwZmNiNDllZmM5N2JmMzQ4OGE3OGU4MDBkZDg1Njk5ZGM1ZDdmNjRlMGJiZTQwZTAzMWNlY2M1ZGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2YzhhMjQwMzE3MWI0ZDAzNjUzYmEwZmJlNTcwNDA4MzkyMmEzNTY5MDU5OGFkYmY1YmY0NjBlZWUyYzY5YTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAifQ"
+        },
+        {
+          "resource": "repo://src/index.ts#L51-L61",
+          "version": "repo-lines-v1:sha256:8eb5eca363b1f1fe6c4fa82f25d855e47caa8ddba0e44bcdb52ce1f0cc1891ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlZTgyYjA0NGZlZGY1YTU3ZDU2YzFjNDJkNzhiZDk0Yjg1Njk3NzZlZTU2NGZkYTU4MDZhMzdkZjA2ZDZjMzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJjNGRiYjUwZDAxMTAyYmFjNjZhMzA2MjgzMTNjZGE0MGY1NjI4ZTcyMTQwNWNiNzVmYWUzMWYzZTVkNWFjODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b4da563b5e542258987d66e62c54d6b",
+      "statement": "CodeBlockProData, exported from the ./admin package entry src/admin.tsx, describes the persisted block data with all-optional fields, including string-typed startingLineNumber, lineHighlights, and maxHeight matching the free-text editor fields.",
+      "evidence": [
+        {
+          "resource": "repo://src/admin.tsx#L1-L11",
+          "version": "repo-lines-v1:sha256:8bf804b21cf77d7f7d71eb1ede51c7bde691f1b25ecd2d33eb5df877fe750f03:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5ODVlZDhhMWZkM2U0NWI3NDYzNDljMjE4MTAxOWY0OGY1MDU1MmFkODVkNGVjMzBiMjgyMTYzODgxOWQwZDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_22e2a83dedba456e8c93b2b77da9ba11",
+      "statement": "src/constants.ts is the single source of truth for the catalog, imported by index.ts, admin.tsx, and highlighter.ts: 14 LANGUAGES (including text and mermaid), 24 THEMES, DEFAULT_THEME github-dark, DEFAULT_LANGUAGE javascript, and derived LANGUAGE_VALUES/THEME_VALUES consumed by the highlighter and tests.",
+      "evidence": [
+        {
+          "resource": "repo://src/constants.ts#L1-L60",
+          "version": "repo-lines-v1:sha256:cdd84600d4944451a0bad1126eb6df50cf8afbba647ec37c13813d79fb3e3d7c:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5YmU0YTg1OTk3NGNkNTZkMmUyYzdkNzNkZmFjMDZjNDY4Y2UwYjc2ZTk5MWZjMzQ0NjIwMWQ1NDZmNWM5N2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-13T15:26:20.939Z"
+  }
+}
