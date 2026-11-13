@@ -5,7 +5,7 @@ description: How highlighter.ts runs Shiki on the pure-JavaScript regex engine f
 tags: [shiki, highlighting, workers, edge, themes]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-5b54a58d1b51cd490b0e7162
     resource: repo://package.json
@@ -13,7 +13,7 @@ sources:
     resource: repo://src/__tests__/admin.test.tsx
   - id: openwiki-source-ce293371f1279f96f1b95d30
     resource: repo://src/utils/highlighter.ts
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Shiki Highlighting Engine
@@ -32,8 +32,7 @@ highlighterPromise = createHighlighter({
 });
 ```
 
-<!-- openwiki: broken internal link [/openwiki/architecture/block-schema.md] link "/openwiki/architecture/block-schema.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-- **All languages preload upfront.** `LANGUAGE_VALUES` comes from the catalog (`src/constants.ts`, see [Block Schema](/openwiki/architecture/block-schema.md)), so first render pays the cost once and every later block — any language in the catalog — hits the warm highlighter.
+- **All languages preload upfront.** `LANGUAGE_VALUES` comes from the catalog (`src/constants.ts`, see [Block Schema](../architecture/block-schema.md)), so first render pays the cost once and every later block — any language in the catalog — hits the warm highlighter.
 - **Only `github-dark` preloads as a theme**; the other 23 load lazily (below), keeping unused themes out of the initial cost.
 - The promise (not the instance) is cached, so concurrent first renders share one initialization instead of racing.
 
@@ -45,8 +44,7 @@ The rendering pipeline's single entry point (`src/utils/highlighter.ts#L61-L99`)
 2. **Theme** — if the theme isn't loaded, it resolves through `THEME_MAP[theme]`, a static record of **dynamic `import()` thunks** (`src/utils/highlighter.ts#L12-L41`) whose keys are exactly the 24 `THEMES` values from `constants.ts`. The static map is what lets Vite see and bundle each theme as its own chunk — a bare `loadTheme(themeName)` string can't be statically analyzed. If the map misses, it still tries `loadTheme(theme)` by name. On any failure it logs `[code-block-pro] Failed to load theme "<theme>":` and falls back to `github-dark`.
 3. **Render** — `highlighter.codeToHtml(code, { lang: lang || "text", theme: theme || "github-dark" })`.
 
-<!-- openwiki: broken internal link [/openwiki/rendering/code-block-pipeline.md] link "/openwiki/rendering/code-block-pipeline.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-The net contract for callers (only `CodeBlockPro.astro`): a highlighted HTML string for any catalog language/theme, with unknown inputs degrading to plain text on the default theme rather than throwing. The component additionally wraps this in its own try/catch with an escaped plain-`<pre>` fallback ([Code Block Rendering Pipeline](/openwiki/rendering/code-block-pipeline.md)).
+The net contract for callers (only `CodeBlockPro.astro`): a highlighted HTML string for any catalog language/theme, with unknown inputs degrading to plain text on the default theme rather than throwing. The component additionally wraps this in its own try/catch with an escaped plain-`<pre>` fallback ([Code Block Rendering Pipeline](code-block-pipeline.md)).
 
 ## Maintenance invariants
 
@@ -55,5 +53,4 @@ The net contract for callers (only `CodeBlockPro.astro`): a highlighted HTML str
 
 ## Why it matters for packaging
 
-<!-- openwiki: broken internal link [/openwiki/operations/packaging-and-release.md] link "/openwiki/operations/packaging-and-release.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-Because Shiki and the JS engine are peer dependencies, the host site controls their versions (`^4.0.0`); the plugin never bundles a tokenizer itself. Combined with server-only rendering, nothing highlighting-related ships to the browser — the client payload is one small delegated click handler (see [Packaging, Publishing, and CI](/openwiki/operations/packaging-and-release.md)).
+Because Shiki and the JS engine are peer dependencies, the host site controls their versions (`^4.0.0`); the plugin never bundles a tokenizer itself. Combined with server-only rendering, nothing highlighting-related ships to the browser — the client payload is one small delegated click handler (see [Packaging, Publishing, and CI](../operations/packaging-and-release.md)).

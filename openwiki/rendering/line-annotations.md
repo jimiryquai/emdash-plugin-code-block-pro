@@ -5,13 +5,13 @@ description: The lineHighlights spec grammar parsed tolerantly by parseLineHighl
 tags: [line-numbers, highlights, css-counters, parsing]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-21241928b5c940111ba88b2f
     resource: repo://src/astro/CodeBlockPro.astro
   - id: openwiki-source-de7713ea142a86f0ca60e7ec
     resource: repo://src/utils/parseLineHighlights.ts
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Line Highlights and Line Numbering
@@ -35,8 +35,7 @@ Two of the block's editor fields — `lineHighlights` (e.g. `1,3-5`) and `lineNu
 
 ## Consuming the set
 
-<!-- openwiki: broken internal link [/openwiki/rendering/code-block-pipeline.md] link "/openwiki/rendering/code-block-pipeline.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-`CodeBlockPro.astro` calls `parseLineHighlights(lineHighlights)` during its frontmatter pipeline. If the set is non-empty, it counts `<span class="line"` occurrences in the Shiki output (line 1 is the first match) and rewrites matching ones to `class="line cbp-highlighted"` — see [Code Block Rendering Pipeline](/openwiki/rendering/code-block-pipeline.md). So highlight indices refer to **physical output lines**, with the single trailing newline already stripped before highlighting.
+`CodeBlockPro.astro` calls `parseLineHighlights(lineHighlights)` during its frontmatter pipeline. If the set is non-empty, it counts `<span class="line"` occurrences in the Shiki output (line 1 is the first match) and rewrites matching ones to `class="line cbp-highlighted"` — see [Code Block Rendering Pipeline](code-block-pipeline.md). So highlight indices refer to **physical output lines**, with the single trailing newline already stripped before highlighting.
 
 ## The numbered gutter (CSS counters)
 
@@ -52,5 +51,4 @@ Line numbers are rendered by CSS counters rather than injected text (`src/astro/
 
 `.line.cbp-highlighted` (`src/astro/CodeBlockPro.astro#L444-L447`) gets a soft indigo backdrop `rgba(99, 102, 241, 0.08)` plus `box-shadow: inset 4px 0 0 0 #6366f1` — a solid 4px left accent bar drawn as an inset shadow. Hover on any line adds a faint background glow and lifts gutter opacity, the plugin's subtle micro-interaction layer.
 
-<!-- openwiki: broken internal link [/openwiki/testing.md] link "/openwiki/testing.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-The gutter and highlight styles live in the component's global stylesheet and are covered by container render tests asserting the exact number of `cbp-highlighted` occurrences (see [Test Suites and Harness](/openwiki/testing.md)).
+The gutter and highlight styles live in the component's global stylesheet and are covered by container render tests asserting the exact number of `cbp-highlighted` occurrences (see [Test Suites and Harness](../testing.md)).

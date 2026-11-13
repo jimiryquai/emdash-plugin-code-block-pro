@@ -5,29 +5,26 @@ description: How CodeBlockPro.astro turns a Portable Text node into finished HTM
 tags: [rendering, astro, server-side, shiki-html, pipeline]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-21241928b5c940111ba88b2f
     resource: repo://src/astro/CodeBlockPro.astro
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Code Block Rendering Pipeline
 
-<!-- openwiki: broken internal link [/openwiki/architecture/overview.md] link "/openwiki/architecture/overview.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-`src/astro/CodeBlockPro.astro` is the site-side renderer for the `code-block-pro` block (registered via `blockComponents`, see [Plugin Architecture Overview](/openwiki/architecture/overview.md)). It receives the raw Portable Text block as `Astro.props.node` and produces fully-styled static HTML — no client framework. Its frontmatter is a deterministic pipeline over the Shiki output.
+`src/astro/CodeBlockPro.astro` is the site-side renderer for the `code-block-pro` block (registered via `blockComponents`, see [Plugin Architecture Overview](../architecture/overview.md)). It receives the raw Portable Text block as `Astro.props.node` and produces fully-styled static HTML — no client framework. Its frontmatter is a deterministic pipeline over the Shiki output.
 
 ## 1. Node defaults and input normalization
 
-<!-- openwiki: broken internal link [/openwiki/architecture/block-schema.md] link "/openwiki/architecture/block-schema.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-The `CodeBlockProNode` interface (`src/astro/CodeBlockPro.astro#L15-L28`) mirrors the persisted shape: `_type: "code-block-pro"`, optional `_key`, required `code`, and the optional fields from [Block Schema](/openwiki/architecture/block-schema.md) — with `lineNumbers`/`copyButton` typed `boolean | string` because values may arrive stringified.
+The `CodeBlockProNode` interface (`src/astro/CodeBlockPro.astro#L15-L28`) mirrors the persisted shape: `_type: "code-block-pro"`, optional `_key`, required `code`, and the optional fields from [Block Schema](../architecture/block-schema.md) — with `lineNumbers`/`copyButton` typed `boolean | string` because values may arrive stringified.
 
 Destructuring applies defaults (`src/astro/CodeBlockPro.astro#L29-L41`): `code = ""`, `language = "text"`, `theme = DEFAULT_THEME` (github-dark), `lineNumbers = false`, `copyButton = true`, `lineHighlights = ""`.
 
 Then:
 
-<!-- openwiki: broken internal link [/openwiki/rendering/line-annotations.md] link "/openwiki/rendering/line-annotations.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-- `highlightedLineNumbers = parseLineHighlights(lineHighlights)` — the highlight set (see [Line Highlights and Line Numbering](/openwiki/rendering/line-annotations.md)).
+- `highlightedLineNumbers = parseLineHighlights(lineHighlights)` — the highlight set (see [Line Highlights and Line Numbering](line-annotations.md)).
 - `trimmedCode = code.replace(/\n$/, "")` — strips one trailing newline so Shiki doesn't emit an empty last line.
 - `codeForShiki = trimmedCode || " "` — empty code becomes a single space so Shiki still produces a well-formed `<pre><code>` skeleton.
 
@@ -71,5 +68,4 @@ Three regex passes over the Shiki HTML (`#L58-L103`):
 
 ## Verification
 
-<!-- openwiki: broken internal link [/openwiki/testing.md] link "/openwiki/testing.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-`src/__tests__/components.test.ts` renders this component through `experimental_AstroContainer` and asserts the real HTML: highlight class counts, `--cbp-theme-fg` for plain text, `data-code` trimming, theme switching, wrapper classes, and the starting-line-number style injection (see [Test Suites and Harness](/openwiki/testing.md)).
+`src/__tests__/components.test.ts` renders this component through `experimental_AstroContainer` and asserts the real HTML: highlight class counts, `--cbp-theme-fg` for plain text, `data-code` trimming, theme switching, wrapper classes, and the starting-line-number style injection (see [Test Suites and Harness](../testing.md)).

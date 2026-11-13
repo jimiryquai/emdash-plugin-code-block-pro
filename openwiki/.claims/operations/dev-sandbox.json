@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:aa1d077c0e228007c40c9b0b974a865ed38581809983ddcbb73259ff95da5cb5",
+  "pageVersion": "sha256:b909ac036e3fb63051c0c81e953adad39a2854646c6f5f41a893232fd68ee0ce",
   "claims": [
     {
       "id": "claim_d1957be83a0741d38a874126acb74e36",
@@ -44,11 +44,15 @@
     },
     {
       "id": "claim_1d593d4fa5bf4f8bbb0f894bed210907",
-      "statement": "The sandbox machinery stays out of the published npm package because the files array allowlists only src, docs, README.md, and LICENSE.",
+      "statement": "The npm files allowlist includes src, docs, README.md, and LICENSE: root sandbox configuration, database, and generated env types are outside it, while src/live.config.ts is inside the included src tree.",
       "evidence": [
         {
           "resource": "repo://package.json#L51-L56",
           "version": "repo-lines-v1:sha256:879b91b6fed0cfa2f43bda3c02cf1c10587305e37d0efd8e06c3e982dc595726:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDY0NmMwYmYwMzk1MjgxYzBjZGI2YjhhZThiZTVjNGYwNjhlN2Q5NTk3MDlkMDhmNjRlZTA4NTgwZjA5OGRiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTY0ZDhjMDczNDI5ODkzMTAxNTc2ZDg4ZDk5MTI3ZTg5ZDY4OTFkM2IxN2U4OWRmMDJlYzlhZTcwNzA1ZDhiZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmQzNzQzYzNhY2ZiNDBhYzRhMjRjOTE4MWU3YTY0NGEwMDk0OTliNTBhYzgzMjEyNGQzMWI3ODA5MWM3NWJjNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTY5NTdhNGQzYmQ1OTIyYTc2NjU4NGY5ZTI4MjgyYzU1ZTNlNzgwMmZiMGVlZmMwMWMxODJmOWE5MDFlZjI5YSJ9"
+        },
+        {
+          "resource": "repo://src/live.config.ts#L1-L6",
+          "version": "repo-lines-v1:sha256:bdaed9fd375339d5eb69cc015499d8b6d4aefcdd50049212c49a5ca22d1ce0de:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFjNmQyODUyMWFjMjI4ZGE3ODdjZTBiMjgyNTEyZmZjZDlkNzliYTRlODQwZmE4Y2Y2YzhkZjI1YTk0NzU1MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         }
       ]
     },
@@ -65,6 +69,6 @@
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-13T15:26:20.939Z"
+    "at": "2026-11-13T18:42:00.637Z"
   }
 }

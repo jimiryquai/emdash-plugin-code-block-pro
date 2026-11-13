@@ -5,7 +5,7 @@ description: The Vitest harness (Astro Vite pipeline with mocked virtual:emdash 
 tags: [testing, vitest, astro-container, harness]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-a2d5568b3954a4931370c48c
     resource: repo://src/__tests__/admin.test.tsx
@@ -21,13 +21,12 @@ sources:
     resource: repo://src/__tests__/parseLineHighlights.test.ts
   - id: openwiki-source-fbadcd8591b65031efaaedce
     resource: repo://vitest.config.ts
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Test Suites and Harness
 
-<!-- openwiki: broken internal link [/openwiki/operations/packaging-and-release.md] link "/openwiki/operations/packaging-and-release.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-`npm test` runs `vitest run` (mirrored by `test.yml` in CI, see [Packaging, Publishing, and CI](/openwiki/operations/packaging-and-release.md)). Six suites under `src/__tests__/` cover every module — the distinctive one renders the real Astro component rather than mocking it.
+`npm test` runs `vitest run` (mirrored by `test.yml` in CI, see [Packaging, Publishing, and CI](operations/packaging-and-release.md)). Six suites under `src/__tests__/` cover every module — the distinctive one renders the real Astro component rather than mocking it.
 
 ## The harness (`vitest.config.ts`)
 
@@ -49,13 +48,11 @@ Renders `CodeBlockPro.astro` through `experimental_AstroContainer` (`beforeAll` 
 - `cbp-has-line-numbers` class on/off with the toggle;
 - custom theme respected; output wrapped in `.cbp-wrapper`; empty code handled;
 - `data-code="hello\nworld"` proving the trailing newline is stripped from the copy payload;
-<!-- openwiki: broken internal link [/openwiki/rendering/line-annotations.md] link "/openwiki/rendering/line-annotations.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-- `style="counter-reset:cbp-line 9"` for `startingLineNumber: 10` — pinning the start-minus-one seeding (see [Line Highlights and Line Numbering](/openwiki/rendering/line-annotations.md)).
+- `style="counter-reset:cbp-line 9"` for `startingLineNumber: 10` — pinning the start-minus-one seeding (see [Line Highlights and Line Numbering](rendering/line-annotations.md)).
 
 ### `descriptor.test.ts` — plugin contract
 
-<!-- openwiki: broken internal link [/openwiki/architecture/block-schema.md] link "/openwiki/architecture/block-schema.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-Asserts the descriptor and native runtime shapes (`src/__tests__/descriptor.test.ts#L1-L116`): `portableTextBlocks` present; `format: "native"`, version `0.2.0`, `entrypoint`, and `componentsEntry` values; `createPlugin()`'s runtime `admin.portableTextBlocks` deep-equal to the descriptor's; **options threading and instance isolation** — a plugin created with `defaultTheme: "nord"` yields `initial_value: "nord"` in both its descriptor and its runtime, while a fresh instance still defaults to `github-dark`; and each of the nine fields with its editor type, exactly nine in total (see [Block Schema](/openwiki/architecture/block-schema.md)).
+Asserts the descriptor and native runtime shapes (`src/__tests__/descriptor.test.ts#L1-L116`): `portableTextBlocks` present; `format: "native"`, version `0.2.0`, `entrypoint`, and `componentsEntry` values; `createPlugin()`'s runtime `admin.portableTextBlocks` deep-equal to the descriptor's; **options threading and instance isolation** — a plugin created with `defaultTheme: "nord"` yields `initial_value: "nord"` in both its descriptor and its runtime, while a fresh instance still defaults to `github-dark`; and each of the nine fields with its editor type, exactly nine in total (see [Block Schema](architecture/block-schema.md)).
 
 ### `parseLineHighlights.test.ts` — grammar edge cases
 
@@ -65,8 +62,7 @@ Pins the parser's full contract (`src/__tests__/parseLineHighlights.test.ts#L1-L
 
 - `admin.test.tsx` — `CodeBlockProData` accepts full, partial, and empty objects; catalog invariants: `LANGUAGES` ≥ 10, `THEMES` exactly 24 with key entries present, defaults valid, `LANGUAGE_VALUES`/`THEME_VALUES` mirror their sources, all options have non-empty label and value.
 - `exports.test.ts` — `blockComponents` has exactly one key, `code-block-pro`, mapped to a defined component.
-<!-- openwiki: broken internal link [/openwiki/operations/dev-sandbox.md] link "/openwiki/operations/dev-sandbox.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-- `dependency.test.ts` — dynamically imports `emdash/runtime` to prove it resolves and exports `emdashLoader` and `getDb` (functions), catching load-time breakage in the host dependency the sandbox relies on ([Development Sandbox](/openwiki/operations/dev-sandbox.md)).
+- `dependency.test.ts` — dynamically imports `emdash/runtime` to prove it resolves and exports `emdashLoader` and `getDb` (functions), catching load-time breakage in the host dependency the sandbox relies on ([Development Sandbox](operations/dev-sandbox.md)).
 
 ## What the suite deliberately does not do
 

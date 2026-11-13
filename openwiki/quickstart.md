@@ -5,7 +5,7 @@ description: Orientation and task-routing map for emdash-plugin-code-block-pro �
 tags: [quickstart, navigation, overview]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-c50574f22a4c0741148fc769
     resource: repo://astro.config.mjs
@@ -19,7 +19,7 @@ sources:
     resource: repo://src/index.ts
   - id: openwiki-source-ce293371f1279f96f1b95d30
     resource: repo://src/utils/highlighter.ts
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Code Block Pro Plugin Quickstart
@@ -35,22 +35,14 @@ The plugin integrates on two sides:
 
 | If you're working on… | Read |
 |-----------------------|------|
-<!-- openwiki: broken internal link [/openwiki/architecture/overview.md] link "/openwiki/architecture/overview.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| Understanding the plugin contract, entrypoints, or the editor→Portable Text→HTML data flow | [Plugin Architecture Overview](/openwiki/architecture/overview.md) |
-<!-- openwiki: broken internal link [/openwiki/architecture/block-schema.md] link "/openwiki/architecture/block-schema.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| The block's editor fields, defaults, `defaultTheme` option, or the language/theme catalog | [Block Schema and Editor Fields](/openwiki/architecture/block-schema.md) |
-<!-- openwiki: broken internal link [/openwiki/rendering/code-block-pipeline.md] link "/openwiki/rendering/code-block-pipeline.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| The renderer: Shiki HTML post-processing, header/copy markup, dark/light theming | [Code Block Rendering Pipeline](/openwiki/rendering/code-block-pipeline.md) |
-<!-- openwiki: broken internal link [/openwiki/rendering/shiki-highlighting.md] link "/openwiki/rendering/shiki-highlighting.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| Themes, language loading, the JS regex engine, or Workers compatibility | [Shiki Highlighting Engine](/openwiki/rendering/shiki-highlighting.md) |
-<!-- openwiki: broken internal link [/openwiki/rendering/line-annotations.md] link "/openwiki/rendering/line-annotations.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| Line numbers, starting offsets, or the `1,3-5` highlight spec | [Line Highlights and Line Numbering](/openwiki/rendering/line-annotations.md) |
-<!-- openwiki: broken internal link [/openwiki/operations/dev-sandbox.md] link "/openwiki/operations/dev-sandbox.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| Running the plugin locally against the sandbox database | [Development Sandbox](/openwiki/operations/dev-sandbox.md) |
-<!-- openwiki: broken internal link [/openwiki/operations/packaging-and-release.md] link "/openwiki/operations/packaging-and-release.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| The npm package, peer ranges, releases, or the GitHub Actions workflows | [Packaging, Publishing, and CI](/openwiki/operations/packaging-and-release.md) |
-<!-- openwiki: broken internal link [/openwiki/testing.md] link "/openwiki/testing.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| The Vitest harness or any test suite | [Test Suites and Harness](/openwiki/testing.md) |
+| Understanding the plugin contract, entrypoints, or the editor→Portable Text→HTML data flow | [Plugin Architecture Overview](architecture/overview.md) |
+| The block's editor fields, defaults, `defaultTheme` option, or the language/theme catalog | [Block Schema and Editor Fields](architecture/block-schema.md) |
+| The renderer: Shiki HTML post-processing, header/copy markup, dark/light theming | [Code Block Rendering Pipeline](rendering/code-block-pipeline.md) |
+| Themes, language loading, the JS regex engine, or Workers compatibility | [Shiki Highlighting Engine](rendering/shiki-highlighting.md) |
+| Line numbers, starting offsets, or the `1,3-5` highlight spec | [Line Highlights and Line Numbering](rendering/line-annotations.md) |
+| Running the plugin locally against the sandbox database | [Development Sandbox](operations/dev-sandbox.md) |
+| The npm package, peer ranges, releases, or the GitHub Actions workflows | [Packaging, Publishing, and CI](operations/packaging-and-release.md) |
+| The Vitest harness or any test suite | [Test Suites and Harness](testing.md) |
 
 ## Fast paths
 

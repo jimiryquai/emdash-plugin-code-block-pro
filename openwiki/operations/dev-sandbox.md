@@ -5,7 +5,7 @@ description: The root-level local sandbox that exercises the plugin end-to-end �
 tags: [development, sandbox, astro, local, emdash]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-c50574f22a4c0741148fc769
     resource: repo://astro.config.mjs
@@ -17,7 +17,7 @@ sources:
     resource: repo://package.json
   - id: openwiki-source-07cd4721f2c3837f78468ccf
     resource: repo://src/live.config.ts
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Development Sandbox
@@ -41,8 +41,7 @@ Two npm scripts drive the sandbox (`package.json#L8-L9`):
 - `vite.server.fs.allow: [".."]` — lets Vite serve the parent directory during local development;
 - the `emdash` integration with `database: sqlite({ url: "file:./sandbox.db" })` and `plugins: [codeBlockProPlugin()]` — the plugin imported straight from `./src/index.ts`, so edits to the descriptor or block fields are picked up immediately.
 
-<!-- openwiki: broken internal link [/openwiki/architecture/block-schema.md] link "/openwiki/architecture/block-schema.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-Note the plugin is registered here **without** options, so the theme field defaults to `github-dark` (see [Block Schema and Editor Fields](/openwiki/architecture/block-schema.md)).
+Note the plugin is registered here **without** options, so the theme field defaults to `github-dark` (see [Block Schema and Editor Fields](../architecture/block-schema.md)).
 
 ## Content collections (`src/live.config.ts`)
 
@@ -62,9 +61,7 @@ export const collections = {
 
 ## What ships vs. what stays local
 
-<!-- openwiki: broken internal link [/openwiki/operations/packaging-and-release.md] link "/openwiki/operations/packaging-and-release.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-<!-- openwiki: broken internal link [/openwiki/testing.md] link "/openwiki/testing.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-The `files` array in `package.json` (`src`, `docs`, `README.md`, `LICENSE`) is the allowlist for the npm package, so all of this sandbox machinery — `astro.config.mjs`, `sandbox.db`, `src/live.config.ts`, the generated env types — stays out of the published artifact (see [Packaging, Publishing, and CI](/openwiki/operations/packaging-and-release.md)). Unit tests don't need the sandbox at all: they run the real Astro component in a Vitest container with a mocked `virtual:emdash` module ([Test Suites and Harness](/openwiki/testing.md)).
+The `files` array in `package.json` (`src`, `docs`, `README.md`, `LICENSE`) is the allowlist for the npm package, so root sandbox files such as `astro.config.mjs`, `sandbox.db`, and the generated env types stay out of the published artifact; `src/live.config.ts` is inside the included `src` tree (see [Packaging, Publishing, and CI](packaging-and-release.md)). Unit tests don't need the sandbox at all: they run the real Astro component in a Vitest container with a mocked `virtual:emdash` module ([Test Suites and Harness](../testing.md)).
 
 ## Historical direction
 

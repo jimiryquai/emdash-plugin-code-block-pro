@@ -5,7 +5,7 @@ description: The npm package contract (exports, peer dependencies, files allowli
 tags: [packaging, publishing, ci, github-actions, npm]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -21,7 +21,7 @@ sources:
     resource: repo://package.json
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Packaging, Publishing, and CI
@@ -33,8 +33,8 @@ The package is published as `emdash-plugin-code-block-pro` and released through 
 - **Type/module**: `"type": "module"` — everything is ESM.
 - **Exports** (`package.json#L11-L14`): `.` → `./src/index.ts`, `./admin` → `./src/admin.tsx`, `./astro` → `./src/astro/index.ts`. The package ships TypeScript source directly; EmDash's Vite pipeline compiles it inside the consuming site.
 - **Peer dependencies** (`package.json#L16-L22`): `emdash ^1.4.0`, `shiki ^4.0.0`, `@shikijs/engine-javascript ^4.0.0`, plus `react`/`@types/react` `^18.0.0`. The heavy rendering stack is the host site's responsibility — installing the plugin means installing its peers too (`npm install emdash-plugin-code-block-pro shiki @shikijs/engine-javascript`).
-- **`files` allowlist** (`package.json#L51-L56`): only `src`, `docs`, `README.md`, `LICENSE` ship. Everything else — the sandbox config, `sandbox.db`, lockfiles, test harness — stays out of the artifact.
-- **Telemetry/build control**: `pnpm.onlyBuiltDependencies` limits postinstall builds to `better-sqlite3` and `esbuild`.
+- **`files` allowlist** (`package.json#L51-L56`): only `src`, `docs`, `README.md`, `LICENSE` ship. Root sandbox configuration, `sandbox.db`, lockfiles, and `vitest.config.ts` stay outside this allowlist. Files under `src`, including `src/live.config.ts` and test sources, remain included.
+- **Install build control**: `pnpm.onlyBuiltDependencies` limits postinstall builds to `better-sqlite3` and `esbuild`.
 
 ## Versioning discipline (0.2.0)
 
@@ -48,9 +48,8 @@ All gate workflows run on Node 22, install with `npm ci --legacy-peer-deps`, and
 |----------|---------|--------------|
 | `ci.yml` | push/PR to master | `npx tsc --noEmit` — type check |
 | `lint.yml` | push/PR to master | `npx eslint src/` — lint the source tree |
-<!-- openwiki: broken internal link [/openwiki/testing.md] link "/openwiki/testing.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| `test.yml` | push/PR to master | `npx vitest run` — the full suite (see [Test Suites and Harness](/openwiki/testing.md)) |
-| `security.yml` | push/PR (any branch) + weekly Monday 06:00 cron | `npm i --package-lock-only` then `npm audit --audit-level=high --omit=dev` — production dependency audit |
+| `test.yml` | push/PR to master | `npx vitest run` — the full suite (see [Test Suites and Harness](../testing.md)) |
+| `security.yml` | push to master / PR (any branch) + weekly Monday 06:00 cron | `npm i --package-lock-only` then `npm audit --audit-level=high --omit=dev` — production dependency audit |
 | `publish.yml` | GitHub release published | publishes to npm (below) |
 
 ## Publishing (`publish.yml`)
@@ -64,5 +63,4 @@ The job's permissions are the trusted-publishing minimum: `contents: read`, `id-
 
 ## Local equivalents
 
-<!-- openwiki: broken internal link [/openwiki/operations/dev-sandbox.md] link "/openwiki/operations/dev-sandbox.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-The same checks run locally: `npm test` (Vitest), plus `npx tsc --noEmit` and `npx eslint src/` matching the CI jobs. The sandbox scripts are separate (see [Development Sandbox](/openwiki/operations/dev-sandbox.md)).
+The same checks run locally: `npm test` (Vitest), plus `npx tsc --noEmit` and `npx eslint src/` matching the CI jobs. The sandbox scripts are separate (see [Development Sandbox](dev-sandbox.md)).

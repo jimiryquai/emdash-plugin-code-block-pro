@@ -5,7 +5,7 @@ description: The single code-block-pro Portable Text block definition — nine e
 tags: [schema, editor, portable-text, fields, constants]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-13T15:26:20.939Z
+    at: 2026-11-13T18:42:00.637Z
 sources:
   - id: openwiki-source-b43ae8dcef91edce2e97fcc3
     resource: repo://src/admin.tsx
@@ -13,7 +13,7 @@ sources:
     resource: repo://src/constants.ts
   - id: openwiki-source-d1fbef09192ffbab6eff0bc2
     resource: repo://src/index.ts
-generated: { by: "claude-code", at: "2026-11-13T15:26:20.939Z" }
+generated: { by: "claude-code", at: "2026-11-13T18:42:00.637Z" }
 ---
 
 # Block Schema and Editor Fields
@@ -26,8 +26,7 @@ The plugin registers exactly one Portable Text block type, `code-block-pro`. Its
 
 ## The block definition (`createBlockType`)
 
-<!-- openwiki: broken internal link [/openwiki/architecture/overview.md] link "/openwiki/architecture/overview.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-`createBlockType(options)` in `src/index.ts#L11-L28` returns the block config used both by the build-time descriptor and the native runtime (see [Plugin Architecture Overview](/openwiki/architecture/overview.md)):
+`createBlockType(options)` in `src/index.ts#L11-L28` returns the block config used both by the build-time descriptor and the native runtime (see [Plugin Architecture Overview](overview.md)):
 
 ```ts
 {
@@ -49,8 +48,7 @@ The nine fields, keyed by `action_id`, are what the admin Block Kit form capture
 | 4 | `filename` | `text_input` | — | Optional filename shown in the header |
 | 5 | `lineNumbers` | `toggle` | `false` | Show the numbered gutter |
 | 6 | `startingLineNumber` | `text_input` | 1 (label says "default: 1") | Offset for the gutter counter |
-<!-- openwiki: broken internal link [/openwiki/rendering/line-annotations.md] link "/openwiki/rendering/line-annotations.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-| 7 | `lineHighlights` | `text_input` | — | Spec like `1,3-5` (see [Line Highlights and Line Numbering](/openwiki/rendering/line-annotations.md)) |
+| 7 | `lineHighlights` | `text_input` | — | Spec like `1,3-5` (see [Line Highlights and Line Numbering](../rendering/line-annotations.md)) |
 | 8 | `copyButton` | `toggle` | `true` | Show the copy-to-clipboard button |
 | 9 | `maxHeight` | `text_input` | — | Max height (e.g. `400px`) for the scroll container |
 
@@ -76,8 +74,7 @@ interface CodeBlockProData {
 }
 ```
 
-<!-- openwiki: broken internal link [/openwiki/rendering/code-block-pipeline.md] link "/openwiki/rendering/code-block-pipeline.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-Note the string-typed `startingLineNumber`, `lineHighlights`, and `maxHeight`: the editor persists free-text values, and the renderer tolerates missing or loosely typed values (booleans may also arrive as strings) — see [Code Block Rendering Pipeline](/openwiki/rendering/code-block-pipeline.md).
+Note the string-typed `startingLineNumber`, `lineHighlights`, and `maxHeight`: the editor persists free-text values, and the renderer tolerates missing or loosely typed values (booleans may also arrive as strings) — see [Code Block Rendering Pipeline](../rendering/code-block-pipeline.md).
 
 ## The catalog (`constants.ts`)
 
@@ -86,5 +83,4 @@ Note the string-typed `startingLineNumber`, `lineHighlights`, and `maxHeight`: t
 - **`LANGUAGES`** (`src/constants.ts#L6-L21`) — 14 `{ label, value }` pairs: JavaScript, TypeScript, Python, Rust, Go, HTML, CSS, JSON, Bash, SQL, Markdown, YAML, Plain Text (`text`), and Mermaid Diagram (`mermaid`). Plain text and Mermaid render as unhighlighted source; Mermaid is deliberately *not* rendered to a diagram server-side.
 - **`THEMES`** (`src/constants.ts#L23-L49`) — 24 `{ label, value }` Shiki themes (GitHub Dark/Light, Dracula, Nord, One Dark Pro, Solarized Dark/Light, Monokai, Synthwave '84, Tokyo Night, Night Owl, the three Rosé Pine variants, Ayu Dark, Light/Dark Plus, four Material Theme variants, Poimandres, Vitesse Dark/Light).
 - **Defaults** — `DEFAULT_THEME = "github-dark"` (`src/constants.ts#L52`) and `DEFAULT_LANGUAGE = "javascript"` (`src/constants.ts#L55`). The highlighter also falls back to `github-dark` when a theme fails to load.
-<!-- openwiki: broken internal link [/openwiki/rendering/shiki-highlighting.md] link "/openwiki/rendering/shiki-highlighting.md" is root-absolute, which no real consumer resolves against the repository root (not a coding agent reading the page, not GitHub's Markdown renderer, not a local viewer); use a path relative to this file instead. Fix the href or restore the target, then delete this comment. -->
-- **Derived lists** — `LANGUAGE_VALUES = LANGUAGES.map(l => l.value)` and `THEME_VALUES = THEMES.map(t => t.value)` (`src/constants.ts#L56-L60`). `LANGUAGE_VALUES` is what the Shiki highlighter preloads (see [Shiki Highlighting Engine](/openwiki/rendering/shiki-highlighting.md)); tests assert the catalog invariants (24 themes, presence of key entries, defaults valid).
+- **Derived lists** — `LANGUAGE_VALUES = LANGUAGES.map(l => l.value)` and `THEME_VALUES = THEMES.map(t => t.value)` (`src/constants.ts#L56-L60`). `LANGUAGE_VALUES` is what the Shiki highlighter preloads (see [Shiki Highlighting Engine](../rendering/shiki-highlighting.md)); tests assert the catalog invariants (24 themes, presence of key entries, defaults valid).

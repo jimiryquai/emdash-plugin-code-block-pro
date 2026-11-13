@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2b0a653b69d52181681a730044b5c5eaed189fd2bb5bec5ae7b2d1d35fb43f5a",
+  "pageVersion": "sha256:5de4b7da879b4f8f4673ff685b52c95c8f37018575813e14d00297e219d4ada0",
   "claims": [
     {
       "id": "claim_3d6fcd4833d3491ebc2bf53c92117c35",
-      "statement": "The package is ESM and ships TypeScript source through three exports (., ./admin, ./astro) with peer dependencies emdash ^1.4.0, shiki ^4.0.0, @shikijs/engine-javascript ^4.0.0, and react/@types/react ^18.0.0, and a files allowlist of src, docs, README.md, and LICENSE that excludes the sandbox machinery.",
+      "statement": "The package is ESM and ships TypeScript source through three exports (., ./admin, ./astro) with peer dependencies emdash ^1.4.0, shiki ^4.0.0, @shikijs/engine-javascript ^4.0.0, and react/@types/react ^18.0.0; its files allowlist includes src, docs, README.md, and LICENSE, including sandbox and test sources within src but excluding root sandbox configuration.",
       "evidence": [
         {
           "resource": "repo://package.json#L4-L56",
@@ -42,7 +42,7 @@
     },
     {
       "id": "claim_18655988fd4540ba8ee0176c76da0ba6",
-      "statement": "security.yml runs npm audit --audit-level=high --omit=dev after an npm i --package-lock-only --legacy-peer-deps, triggering on push and pull requests to any branch plus a weekly Monday 6 AM cron schedule.",
+      "statement": "security.yml runs npm audit --audit-level=high --omit=dev after npm i --package-lock-only --legacy-peer-deps, triggering on pushes to master, pull requests without a branch filter, and a weekly Monday 06:00 cron schedule.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/security.yml#L1-L20",
@@ -63,6 +63,6 @@
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-13T15:26:20.939Z"
+    "at": "2026-11-13T18:42:00.637Z"
   }
 }
